@@ -273,6 +273,31 @@ const ALL_QUESTIONS = [
   {id:73,module:9,q:"In the Lewis Case, what was the BitLocker Recovery Key ID found in Axiom Process?",options:["A47F2211-B312-4891-AA10-3C56D899F21A","7F6C6887-C345-4572-8C17-9B73F57BF68F","F1B2C3D4-E5F6-4A7B-8C9D-0E1F2A3B4C5D","5555AAAA-BBBB-CCCC-DDDD-EEEEFFFFAAAA"],answer:1,explanation:"The Recovery Key ID in the exercise was: 7F6C6887-C345-4572-8C17-9B73F57BF68F. The matching BitLocker Recovery Key artifact in Axiom Examine provided the decryption key value."},
   {id:74,module:10,q:"What information does the Cloud Dropbox Files artifact include?",options:["Only filename and download date","File location in Dropbox, File ID, File Version ID, server/client last modified timestamps, original photo timestamp, and content preview","Only file hash values","Dropbox account credentials and session tokens"],answer:1,explanation:"Cloud Dropbox Files includes: file location within Dropbox, File ID, File Version ID, server and client last modified timestamps, original photo timestamp (if present), and a content preview."},
   {id:75,module:5,q:"What does the Time Zone Information artifact parse from?",options:["The Windows Event Logs","Both the SYSTEM hive (ControlSet###\\Control\\TimeZoneInformation) and SOFTWARE hive","The NTUSER.DAT file only","The pagefile.sys"],answer:1,explanation:"Timezone Information is parsed from both the SYSTEM hive (ControlSet###\\Control\\TimeZoneInformation) and the SOFTWARE hive. Identifying the machine timezone lets the examiner set correct timezone in forensic tools."},
+  {id:76,module:1,q:"Where should Axiom temporary processing files be stored for best performance?",options:["Same drive as the evidence files","A separate physical drive from the evidence","The Windows system drive (C:)","Any network share"],answer:1,explanation:"Axiom temp files should be stored on a SEPARATE physical disk from the evidence. This maximises I/O throughput by avoiding disk contention during processing. Configure via Tools → Settings → Custom Location."},
+  {id:77,module:2,q:"What does enabling OCR as a processing option in Axiom allow you to do?",options:["Optically extract text from image files and scanned PDFs","Recover deleted files from unallocated space","Convert browser cache to readable HTML","Match files against the NSRL hash set"],answer:0,explanation:"OCR (Optical Character Recognition) extracts text from image files and scanned PDFs, making them keyword-searchable in Axiom Examine. Critical for finding classification markings in scanned documents."},
+  {id:78,module:3,q:"In Magnet One, what is the default naming prefix assigned to new cases?",options:["CASE-","INV-","CSE-","MFT-"],answer:2,explanation:"Magnet One uses CSE- as the default prefix for cases and EVD- for evidence items. Both are customisable via the Settings cog in the Magnet One dashboard."},
+  {id:79,module:4,q:"In Axiom Mobile View, which iOS acquisition types are supported?",options:["JTAG and chip-off only","AFU, FFS (Graykey/Verakey), and UFED Premium","USB debugging only","iTunes backup only"],answer:1,explanation:"Axiom Mobile View supports iOS via: AFU (After First Unlock), FFS (Full File System via Graykey or Verakey), and UFED Premium. Android supports: FFS, AFU, Logical+, and UFED Premium."},
+  {id:80,module:5,q:"ShutdownTime is stored in which registry hive and key?",options:["NTUSER.DAT — CurrentVersion\\Explorer","SOFTWARE — Windows NT\\CurrentVersion","SYSTEM — ControlSet###\\Control\\Windows","SAM — Domains\\Account"],answer:2,explanation:"ShutdownTime is in the SYSTEM hive under ControlSet###\\Control\\Windows. The 8-byte Windows 64-bit Little Endian timestamp is decoded via HEX card → DECODE card in Registry Explorer."},
+  {id:81,module:5,q:"Application names in the Windows UserAssist registry key are encoded in which format?",options:["Base64","ROT-13","MD5 hash","AES-256"],answer:1,explanation:"UserAssist key names are ROT-13 encoded (each letter shifts 13 positions). Axiom decodes these automatically. UserAssist is user-specific (NTUSER.DAT), recording application execution count and last run time."},
+  {id:82,module:6,q:"The Rebuilt Desktop feature in Axiom Examine is available for which Windows versions?",options:["Windows 7, 8, and 10","Windows 10 ONLY","Windows 8, 10, and 11","All Windows versions since Vista"],answer:1,explanation:"Rebuilt Desktop is Windows 10 ONLY — not 7, 8, or 11. It reconstructs the desktop wallpaper, Quick Launch bar, and shortcuts from registry hives. Icons are NOT in their exact original positions."},
+  {id:83,module:6,q:"The Cloud Services URLs artifact in Refined Results identifies what?",options:["Files downloaded from cloud storage","URLs from browser history associated with cloud services — helps identify cloud platforms in use","Cloud API keys and tokens","Files uploaded to cloud storage"],answer:1,explanation:"Cloud Services URLs finds URLs in browser history that are associated with cloud platforms (Google Drive, Dropbox, OneDrive, iCloud etc), helping identify which services the subject used — each may be a target for cloud acquisition."},
+  {id:84,module:7,q:"What is a key difference between Firefox cache and Firefox bookmark storage locations?",options:["Both are in the ROAMING profile","Cache is in LOCAL; bookmarks (places.sqlite) are in ROAMING","Cache is in ROAMING; bookmarks are in LOCAL","Both are in the LOCAL profile"],answer:1,explanation:"Firefox cache is in AppData\\Local (LOCAL profile). Firefox bookmarks (places.sqlite) are in AppData\\Roaming (ROAMING profile). This LOCAL vs ROAMING distinction is a classic exam trap."},
+  {id:85,module:7,q:"The built-in SQLite Viewer in Axiom Examine is used to inspect which artifacts?",options:["Windows registry hives","Browser SQLite databases in File System Explorer","Email PST files","Memory dumps"],answer:1,explanation:"The SQLite Viewer is accessed via File System Explorer and allows direct inspection of browser databases (Chrome History, Firefox places.sqlite). Useful for verifying raw data behind parsed artifacts."},
+  {id:86,module:8,q:"When you search keywords via the Filters bar in Email Explorer, which parts of the email are searched?",options:["Subject line only","Subject and body only","ALL parts simultaneously — subject, body, headers, and attachments","Attachment filenames only"],answer:2,explanation:"Keyword search from the Filters bar in Email Explorer searches ALL PARTS of the email simultaneously — subject, body, email headers, and attachment content. This is one of the most powerful exam filter techniques."},
+  {id:87,module:8,q:"Conversation View in Axiom Examine is automatically applied to which artifact type?",options:["All email artifacts","All SMS messages","WhatsApp messages in Mobile View","Skype messages only"],answer:2,explanation:"Conversation View is automatically applied to WhatsApp messages when viewed in Mobile View. It presents messages in a threaded, human-readable chat format reflecting how the conversation appeared to the user."},
+  {id:88,module:9,q:"How do you configure Axiom to automatically rebuild Connections when new evidence is added?",options:["Evidence Processing settings","Tools → Settings → Connections section","Help → Documentation","Case creation wizard"],answer:1,explanation:"Auto-build for Connections is configured in Tools → Settings → Connections. When enabled, Axiom rebuilds the Connections Explorer automatically on processing completion or when new evidence is added."},
+  {id:89,module:9,q:"After adding decrypted BitLocker evidence to an open case, what does Axiom show when processing completes?",options:["Automatic page reload","A system tray notification","A Processing complete dialog — click OK to reload the updated case","An email notification"],answer:2,explanation:"Axiom shows a Processing complete dialog when additional evidence finishes processing. Clicking OK reloads the case with the new evidence and, if auto-build is enabled, updates Connections and Timeline automatically."},
+  {id:90,module:10,q:"A Google Takeout acquisition is added in Axiom Process under which path?",options:["Computer → Windows → Archive","Cloud → Google → Takeout","Mobile → Android → Backup","Computer → Linux → Image"],answer:1,explanation:"Google Takeout data is added via Cloud → Google → Takeout in Axiom Process. It processes the .zip export from Google Takeout, which includes Gmail, Drive, Calendar, Location History, and other Google account data."},
+  {id:91,module:10,q:"What is the key forensic difference between the local OneDrive artifact and Cloud OneDrive Files?",options:["They contain identical information","Cloud OneDrive Files may include files NOT stored locally AND shows file sharing (Shared With) information","Local OneDrive is more comprehensive","Cloud OneDrive Files shows only deleted files"],answer:1,explanation:"Local OneDrive comes from a .ini file and shows only synced files. Cloud OneDrive Files (acquired via Axiom Cloud) may include cloud-only files (never downloaded) AND shows Shared With information — critical for proving distribution of documents."},
+  {id:92,module:11,q:"At what intervals does Axiom create filmstrip still frames for video files?",options:["Every 30 seconds","Every minute","At every 10% of the video duration","Every 5% of the video duration"],answer:2,explanation:"Axiom captures filmstrip frames at every 10% of video duration. A 10-minute video yields frames at the 1, 2, 3...10 minute marks — enabling quick visual review without full playback."},
+  {id:93,module:11,q:"What does CBIR (Content-Based Image Recognition) do in Axiom Examine?",options:["Recovers cached browser images","Finds visually similar images based on content rather than file hash","Generates summary investigation reports","Reads raw disk images"],answer:1,explanation:"CBIR finds visually similar images based on visual content — useful for finding different resolutions, crops, or edits of the same image that would not match via MD5/SHA1 hash comparison."},
+  {id:94,module:11,q:"Which Media Explorer filter group contains EXIF data identifying which device took a photo?",options:["VICS ATTRIBUTES","INVESTIGATION LEADS","CAMERA DETAILS","FILE ATTRIBUTES"],answer:2,explanation:"CAMERA DETAILS contains EXIF metadata including camera make, model, and settings — identifying which device took the photo. INVESTIGATION LEADS covers creation dates and geolocation. VICS ATTRIBUTES covers Project VIC hash set matches."},
+  {id:95,module:12,q:"You tag one item in a Media Explorer hit stack. What happens to the other copies of the same file?",options:["Only the selected copy is tagged","All copies in the stack across ALL evidence sources are automatically tagged","A dialog asks which copies to tag","Only copies on the same evidence source are tagged"],answer:1,explanation:"Hit Stacking: tagging (or grading) ONE copy applies to ALL copies of that file across ALL evidence sources simultaneously. If a file is relevant or classified, that applies regardless of which device it came from."},
+  {id:96,module:12,q:"What is an Axiom Portable Case?",options:["A compressed backup of the full case","A subset of artifacts exportable and reviewable without Axiom installed on the recipient machine","A mobile app version of Axiom","An encrypted case archive for secure transport"],answer:1,explanation:"A Portable Case exports a subset of artifacts that can be reviewed WITHOUT Axiom installed. Used to share specific evidence with prosecutors, defence counsel, or investigators who do not have Axiom licences."},
+  {id:97,module:4,q:"Which Case Dashboard feature shows a chronological overview of key events from the processed case?",options:["Evidence Sources panel","Insights panel","Event Snapshot","File System Explorer"],answer:2,explanation:"Event Snapshot on the Case Dashboard provides a chronological timeline of key events extracted during processing — useful for quickly establishing a case timeline before drilling into specific artifacts."},
+  {id:98,module:5,q:"In the Windows Recycle Bin structure, what does the $I file contain?",options:["The actual deleted file content","The original file path, deletion timestamp, and original file size","Only the deletion timestamp","The hash of the deleted file"],answer:1,explanation:"For each deleted file in $Recycle.Bin: the $I[name] file contains metadata (original path, deletion timestamp, size) and $R[name] contains the actual file content. The $I metadata survives even if $R content is overwritten."},
+  {id:99,module:6,q:"What is the maximum recording duration supported by the Route View feature?",options:["30 minutes","1 hour","2 hours","4 hours"],answer:2,explanation:"Route View supports a maximum of 2 hours of GPS route recording. Exports are saved as video files to the Export folder in the case directory. Route View also supports DJI drone log files for flight path reconstruction."},
+  {id:100,module:9,q:"In Axiom Process, what visual indicator shows that an evidence item contains a BitLocker-encrypted volume?",options:["A red X over the evidence item","A padlock icon next to the evidence item","A warning triangle","The item is highlighted in yellow"],answer:1,explanation:"A padlock icon appears beside the evidence item in Axiom Process when a BitLocker-encrypted volume is detected. The NEXT button remains grayed out until a valid Recovery Key is entered — then Axiom decrypts the volume during processing."},
 ];
 
 const TIPS = [
@@ -1223,6 +1248,52 @@ const LAB_REF = {
         },
       ]
     },
+    {
+      category: "Anti-Forensics Detection",
+      color: "#e879f9", icon: "🛡️",
+      items: [
+        {
+          name: "Encrypted Files",
+          path: "Operating System → Encrypted Files",
+          source: "NTFS EFS attributes, .axx (AxCrypt), .hc/.vc (VeraCrypt), .7z/.zip with password, BitLocker volumes",
+          notes: "Does NOT identify which program encrypted the files — only shows that encryption was applied. Check Prefetch for encryption tool execution",
+          meaning: "Files on the device that are encrypted — indicating the user actively chose to protect specific content from examination",
+          identifies: "Which files are encrypted, their locations, NTFS timestamps, EFS certificate info. AxCrypt files = .axx extension. VeraCrypt containers = large files with generic extension",
+          supports: "Demonstrating deliberate concealment. Encryption combined with investigation context proves intent to hide content. Cross-reference with Prefetch for the encryption tool that was used",
+          interpret: "Encrypted file + Prefetch entry for AxCrypt.exe at same timestamp = user personally encrypted those files at that time. VeraCrypt container present + VeraCrypt.exe in Prefetch = suspect ran VeraCrypt regularly. EFS-encrypted files = recoverable with user certificate if account is available. Encrypted files containing classified names/codes in filename = suspect knew content and chose to encrypt"
+        },
+        {
+          name: "Recycle Bin",
+          path: "Operating System → Recycle Bin",
+          source: "$Recycle.Bin\\[UserSID]\\ — $I[name] (metadata) + $R[name] (content)",
+          notes: "$I = original path + deletion timestamp + original size. $R = actual deleted file content. SID subfolder identifies which user account deleted the file",
+          meaning: "Records of files the user deliberately soft-deleted (Shift+Delete bypasses Recycle Bin and does not appear here)",
+          identifies: "Deleted file names and original paths, exact deletion timestamps, original file sizes, which user SID deleted them",
+          supports: "Proving evidence was deliberately destroyed. Deletion of a file containing classified content = tampering with evidence. Original path reveals where files lived before deletion",
+          interpret: "SID in folder path → cross-reference with User Accounts to confirm which user account deleted the file. Deletion timestamp correlated with other events (e.g. right before USB disconnection) = deliberate cleanup. $R file content = actual deleted file is directly recoverable. Absence of Recycle Bin entry for a file known to have existed = Shift+Delete (permanent) was used, which itself indicates deliberate destruction"
+        },
+        {
+          name: "Anti-Forensic Tool Prefetch",
+          path: "Operating System → Prefetch Files – Windows 8/10/11",
+          source: "Windows\\Prefetch\\[TOOL].*.pf — execution of known anti-forensic applications",
+          notes: "Anti-forensic tools create their own Prefetch entries — the irony: tools used to destroy evidence leave execution records. Look for: CCLEANER64.EXE, BLEACHBIT.EXE, ERASER.EXE, SDELETE.EXE",
+          meaning: "Prefetch files proving the user executed known anti-forensic or file-wiping tools — even if those tools were subsequently deleted",
+          identifies: "CCleaner (CCLEANER64.EXE), BleachBit (BLEACHBIT.EXE), Eraser (ERASER.EXE), SDelete (SDELETE.EXE), AxCrypt (AXCRYPT.EXE), VeraCrypt (VERACRYPT.EXE), Tor Browser, privacy-focused apps",
+          supports: "Proving consciousness of guilt and deliberate evidence destruction. Anti-forensic tool execution immediately before gaps in other artifacts = tool was run to clear that evidence",
+          interpret: "CCleaner.exe Prefetch timestamp + gaps in Chrome history starting at same time = CCleaner was run specifically to clear browser history. Run count shows regularity of use — not a one-time accident. AxCrypt.exe + encrypted .axx files = user personally encrypted those files. VeraCrypt.exe run count = used regularly, not just once (deliberate operational security practice)"
+        },
+        {
+          name: "Volume Shadow Copies",
+          path: "File System Explorer → System Volume Information (via VSS processing, must be enabled pre-processing)",
+          source: "NTFS VSS snapshots — System Volume Information\\",
+          notes: "MUST enable VSS processing in Axiom Process BEFORE processing — not enabled by default. VSS deletion leaves traces in Windows System Event Log",
+          meaning: "Point-in-time Windows snapshots that may contain previous versions of deleted or modified files — recovering content that anti-forensic tools missed",
+          identifies: "Previous versions of files deleted or modified after the snapshot, file system state at historical points in time, content that existed before anti-forensic cleanup",
+          supports: "Recovering evidence of deleted or modified files. Comparing VSS vs current file system reveals exactly what changed and when",
+          interpret: "File in VSS but absent from current file system = file was deleted AFTER the snapshot. File in VSS with different content = file was modified after snapshot. Look for VSS copies near key dates. Event ID 7036 or vssadmin delete shadows in System log = deliberate VSS deletion — itself an act of evidence destruction. If VSS is absent on a machine that should have it = suspect deleted all shadow copies"
+        },
+      ]
+    },
   ],
   registry: [
     { hive:"SAM", key:"SAM\\Domains\\Account\\Users\\[RID]", artifact:"User Accounts – Windows", contains:"Username, SID, RID (last value), last login, last password change, login count, profile path", forensic:"RID 1000+ = real user. Login count = 0 with MS account = server-side auth. Login times establish when user was active" },
@@ -1475,6 +1546,10 @@ export default function App() {
   const [aiInput, setAiInput] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
   const [calmTab, setCalmTab] = useState("mindset");
+  const [collapsed, setCollapsed] = useState({});
+  const [labSearch, setLabSearch] = useState("");
+
+  const toggleCollapse = (key) => setCollapsed(p => ({...p, [key]: !p[key]}));
 
   const startQuiz = useCallback(() => {
     let pool = selMod === 0 ? [...ALL_QUESTIONS] : ALL_QUESTIONS.filter(q => q.module === selMod);
@@ -1506,7 +1581,7 @@ export default function App() {
       <div style={S.hdr}>
         <div style={S.badge}>MCFE EXAM PREP</div>
         <h1 style={S.title}>Magnet AXIOM<br/><span style={{color:"#0ea5e9"}}>Certification Trainer</span></h1>
-        <p style={{color:"#64748b",fontSize:13,marginTop:8}}>AX200 v2604 · 75 Questions · 80% to Pass · 2-Year Validity</p>
+        <p style={{color:"#64748b",fontSize:13,marginTop:8}}>AX200 v2604 · 100 Practice Qs · 80% to Pass · 2-Year Validity</p>
       </div>
       <button onClick={()=>setView("yourexam")} style={{width:"100%",background:"linear-gradient(135deg,#1a0000,#3b0000,#1a0000)",border:"2px solid #f87171",borderRadius:12,padding:"14px 16px",cursor:"pointer",textAlign:"left",marginBottom:8,display:"flex",alignItems:"center",gap:12,position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:0,right:0,background:"#f87171",color:"#0a0f1e",fontSize:9,fontWeight:900,padding:"3px 10px",borderRadius:"0 10px 0 8px",letterSpacing:1}}>YOUR ACTUAL EXAM</div>
@@ -1558,7 +1633,7 @@ export default function App() {
         ))}
       </div>
       <div style={S.stats}>
-        {[["75","Questions"],["120","Minutes"],["80%","Pass Mark"],["12","Modules"]].map(([n,l],i,a)=>(
+        {[["100","Practice Qs"],["120","Exam Mins"],["80%","Pass Mark"],["12","Modules"]].map(([n,l],i,a)=>(
           <div key={i} style={{display:"flex",alignItems:"center"}}>
             <div style={S.stat}><span style={S.sn}>{n}</span><span style={S.sl}>{l}</span></div>
             {i<a.length-1&&<div style={S.sdiv}/>}
@@ -1641,8 +1716,8 @@ export default function App() {
       <div style={S.block}>
         <label style={S.lbl}>Number of Questions</label>
         <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
-          {[10,20,30,40,75].map(n=>(
-            <button key={n} style={{...S.cntbtn,...(qCount===n?S.cntA:{})}} onClick={()=>setQCount(n)}>{n===75?"Full (75)":n}</button>
+          {[10,20,30,50,75,100].map(n=>(
+            <button key={n} style={{...S.cntbtn,...(qCount===n?S.cntA:{})}} onClick={()=>setQCount(n)}>{n===100?"All (100)":n===75?"Exam (75)":n}</button>
           ))}
         </div>
       </div>
@@ -1733,15 +1808,34 @@ export default function App() {
           <button key={i} style={{...S.chip,...(studyIdx===i?S.chipA:{})}} onClick={()=>setStudyIdx(i)}>{m.icon} M{m.mod}</button>
         ))}
       </div>
-      <div style={{background:"#111827",border:"1px solid #1e293b",borderRadius:10,padding:18,marginBottom:14}}>
-        <h3 style={{fontSize:15,fontWeight:700,color:"#0ea5e9",margin:"0 0 14px"}}>
-          {MODULE_SUMMARIES[studyIdx].icon} Module {MODULE_SUMMARIES[studyIdx].mod}: {MODULE_SUMMARIES[studyIdx].title}
-        </h3>
-        {MODULE_SUMMARIES[studyIdx].points.map((pt,i)=>(
-          <div key={i} style={{display:"flex",gap:8,marginBottom:9,fontSize:13,lineHeight:1.5}}>
-            <span style={{color:"#0ea5e9",minWidth:12}}>▸</span><span>{pt}</span>
-          </div>
-        ))}
+      <div style={{background:"#111827",border:"1px solid #1e293b",borderRadius:10,overflow:"hidden",marginBottom:14}}>
+        <div style={{padding:"14px 18px 0"}}>
+          <h3 style={{fontSize:15,fontWeight:700,color:"#0ea5e9",margin:"0 0 12px"}}>
+            {MODULE_SUMMARIES[studyIdx].icon} Module {MODULE_SUMMARIES[studyIdx].mod}: {MODULE_SUMMARIES[studyIdx].title}
+          </h3>
+        </div>
+        {MODULE_SUMMARIES[studyIdx].points.map((pt,i)=>{
+          const key = `study-${studyIdx}-${i}`;
+          const isCollapsed = collapsed[key];
+          const preview = pt.length > 80 ? pt.substring(0,80)+"…" : pt;
+          return (
+            <div key={i} style={{borderBottom:"1px solid #1e293b10"}}>
+              <button onClick={()=>toggleCollapse(key)} style={{width:"100%",display:"flex",gap:8,alignItems:"flex-start",padding:"9px 18px",background:"transparent",border:"none",cursor:"pointer",textAlign:"left"}}>
+                <span style={{color:"#0ea5e9",minWidth:12,paddingTop:2,flexShrink:0}}>▸</span>
+                <span style={{fontSize:13,lineHeight:1.5,color:isCollapsed?"#64748b":"#cbd5e1",flex:1}}>{isCollapsed ? preview : pt}</span>
+                {pt.length > 80 && <span style={{color:"#334155",fontSize:10,flexShrink:0,marginTop:2}}>{isCollapsed?"▼":"▲"}</span>}
+              </button>
+            </div>
+          );
+        })}
+        <div style={{padding:"10px 18px"}}>
+          <button onClick={()=>{
+            const allOpen = MODULE_SUMMARIES[studyIdx].points.every((_,i)=>!collapsed[`study-${studyIdx}-${i}`]);
+            setCollapsed(p=>{const n={...p};MODULE_SUMMARIES[studyIdx].points.forEach((_,i)=>{n[`study-${studyIdx}-${i}`]=allOpen;});return n;});
+          }} style={{fontSize:10,color:"#475569",background:"none",border:"none",cursor:"pointer",padding:0}}>
+            {MODULE_SUMMARIES[studyIdx].points.every((_,i)=>!collapsed[`study-${studyIdx}-${i}`])?"Collapse all points":"Expand all points"}
+          </button>
+        </div>
       </div>
       <div style={S.navrow}>
         <button style={S.navbtn} onClick={()=>setStudyIdx(m=>Math.max(0,m-1))} disabled={studyIdx===0}>← Previous</button>
@@ -1755,13 +1849,27 @@ export default function App() {
     <div style={S.root}>
       <button style={S.back} onClick={()=>setView("home")}>← Back</button>
       <h2 style={S.ptitle}>⚡ Exam Tips & Critical Details</h2>
-      <p style={{color:"#94a3b8",marginBottom:16,fontSize:13}}>Details that separate a 75% from a 90%.</p>
-      {TIPS.map((tip,i)=>(
-        <div key={i} style={{display:"flex",gap:12,alignItems:"flex-start",background:"#111827",border:"1px solid #1e293b",borderRadius:8,padding:"12px 14px",marginBottom:8}}>
-          <span style={{fontSize:11,color:"#0ea5e9",fontWeight:700,minWidth:26,paddingTop:2}}>{String(i+1).padStart(2,"0")}</span>
-          <span style={{fontSize:13,color:"#cbd5e1",lineHeight:1.5}}>{tip}</span>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
+        <p style={{color:"#94a3b8",fontSize:13,margin:0}}>Details that separate a 75% from a 90%.</p>
+        <div style={{display:"flex",gap:6}}>
+          <button onClick={()=>setCollapsed(p=>{const n={...p};TIPS.forEach((_,i)=>{n[`tip-${i}`]=true;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Collapse all</button>
+          <button onClick={()=>setCollapsed(p=>{const n={...p};TIPS.forEach((_,i)=>{n[`tip-${i}`]=false;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Expand all</button>
         </div>
-      ))}
+      </div>
+      {TIPS.map((tip,i)=>{
+        const key = `tip-${i}`;
+        const isCollapsed = collapsed[key];
+        const preview = tip.length > 90 ? tip.substring(0,90)+"…" : tip;
+        return (
+          <div key={i} style={{background:"#111827",border:"1px solid #1e293b",borderRadius:8,marginBottom:6,overflow:"hidden"}}>
+            <button onClick={()=>toggleCollapse(key)} style={{width:"100%",display:"flex",gap:10,alignItems:"flex-start",padding:"11px 13px",background:"transparent",border:"none",cursor:"pointer",textAlign:"left"}}>
+              <span style={{fontSize:11,color:"#0ea5e9",fontWeight:700,minWidth:26,paddingTop:2,flexShrink:0}}>{String(i+1).padStart(2,"0")}</span>
+              <span style={{fontSize:13,color:isCollapsed?"#64748b":"#cbd5e1",lineHeight:1.5,flex:1}}>{isCollapsed ? preview : tip}</span>
+              {tip.length > 90 && <span style={{color:"#475569",fontSize:10,flexShrink:0,marginTop:3}}>{isCollapsed?"▼":"▲"}</span>}
+            </button>
+          </div>
+        );
+      })}
       <button style={{...S.primary,marginTop:16}} onClick={()=>setView("home")}>← Back to Home</button>
     </div>
   );
@@ -1824,41 +1932,52 @@ export default function App() {
         <h2 style={S.ptitle}>🌐 Community Intel</h2>
         <p style={{color:"#64748b",fontSize:12,marginBottom:16}}>Real experiences, reviews, and exam intelligence from the DFIR community — sourced from ThinkDFIR, Notre Dame CDT Program, Magnet official docs, and community Q&A platforms (Quizlet, Stuvia, Docsity).</p>
 
-        {COMMUNITY_INTEL.map((item,i)=>(
-          <div key={i} style={{background:"#111827",border:"1px solid #1e293b",borderRadius:12,padding:16,marginBottom:14}}>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:10,flexWrap:"wrap",gap:6}}>
-              <div>
-                <span style={{fontSize:11,background:"#0f172a",color:item.tagColor,padding:"3px 10px",borderRadius:12,fontWeight:700,border:`1px solid ${item.tagColor}40`}}>{item.tag}</span>
+        <div style={{display:"flex",justifyContent:"flex-end",gap:6,marginBottom:10}}>
+          <button onClick={()=>setCollapsed(p=>{const n={...p};COMMUNITY_INTEL.forEach((_,i)=>{n[`ci-${i}`]=true;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Collapse all</button>
+          <button onClick={()=>setCollapsed(p=>{const n={...p};COMMUNITY_INTEL.forEach((_,i)=>{n[`ci-${i}`]=false;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Expand all</button>
+        </div>
+        {COMMUNITY_INTEL.map((item,i)=>{
+          const key = `ci-${i}`;
+          const isCollapsed = collapsed[key];
+          return (
+          <div key={i} style={{background:"#111827",border:"1px solid #1e293b",borderRadius:12,marginBottom:10,overflow:"hidden"}}>
+            <button onClick={()=>toggleCollapse(key)} style={{width:"100%",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 16px",background:"transparent",border:"none",cursor:"pointer",textAlign:"left",gap:10}}>
+              <div style={{flex:1}}>
+                <div style={{display:"flex",gap:8,alignItems:"center",marginBottom:3}}>
+                  <span style={{fontSize:10,background:"#0f172a",color:item.tagColor,padding:"2px 8px",borderRadius:10,fontWeight:700,border:`1px solid ${item.tagColor}40`,flexShrink:0}}>{item.tag}</span>
+                  <div style={{display:"flex",gap:2}}>
+                    {[1,2,3,4,5].map(s=>(
+                      <span key={s} style={{fontSize:11,color:s<=item.rating?"#fbbf24":"#334155"}}>★</span>
+                    ))}
+                  </div>
+                </div>
+                <div style={{fontSize:13,fontWeight:700,color:"#e2e8f0"}}>{item.source}</div>
+                <div style={{fontSize:11,color:"#475569"}}>{item.role} · {item.date}</div>
               </div>
-              <div style={{display:"flex",gap:2}}>
-                {[1,2,3,4,5].map(s=>(
-                  <span key={s} style={{fontSize:12,color:s<=item.rating?"#fbbf24":"#1e293b"}}>★</span>
+              <span style={{color:"#475569",fontSize:12,flexShrink:0,transform:isCollapsed?"rotate(-90deg)":"rotate(0deg)",transition:"transform 0.2s",display:"inline-block"}}>▾</span>
+            </button>
+            {!isCollapsed && (
+              <div style={{padding:"0 16px 16px"}}>
+                <div style={{fontSize:13,color:"#94a3b8",marginBottom:12,lineHeight:1.5}}>{item.summary}</div>
+                <div style={{borderLeft:"3px solid #1e40af",background:"#0f172a",borderRadius:"0 6px 6px 0",padding:"10px 14px",marginBottom:12}}>
+                  <div style={{fontSize:11,color:"#60a5fa",fontWeight:700,marginBottom:4}}>📣 KEY QUOTE</div>
+                  <p style={{fontSize:12,color:"#93c5fd",fontStyle:"italic",lineHeight:1.6,margin:0}}>"{item.quote}"</p>
+                </div>
+                <div style={{fontSize:11,color:"#64748b",fontWeight:700,marginBottom:8,letterSpacing:1,textTransform:"uppercase"}}>Key Takeaways</div>
+                {item.keyPoints.map((pt,j)=>(
+                  <div key={j} style={{display:"flex",gap:8,marginBottom:7,alignItems:"flex-start"}}>
+                    <span style={{color:item.tagColor,fontSize:10,minWidth:12,paddingTop:3}}>▸</span>
+                    <span style={{fontSize:12,color:"#cbd5e1",lineHeight:1.5}}>{pt}</span>
+                  </div>
                 ))}
+                <a href={item.url} target="_blank" rel="noopener noreferrer" style={{display:"inline-block",marginTop:8,fontSize:11,color:"#475569",textDecoration:"none"}}>
+                  🔗 Source: {item.url.replace("https://","").split("/")[0]}
+                </a>
               </div>
-            </div>
-
-            <div style={{fontSize:14,fontWeight:700,color:"#e2e8f0",marginBottom:3}}>{item.source}</div>
-            <div style={{fontSize:11,color:"#475569",marginBottom:8}}>{item.role} · {item.date}</div>
-            <div style={{fontSize:13,color:"#94a3b8",marginBottom:12,lineHeight:1.5}}>{item.summary}</div>
-
-            <div style={{borderLeft:"3px solid #1e40af",background:"#0f172a",borderRadius:"0 6px 6px 0",padding:"10px 14px",marginBottom:12}}>
-              <div style={{fontSize:11,color:"#60a5fa",fontWeight:700,marginBottom:4}}>📣 KEY QUOTE</div>
-              <p style={{fontSize:12,color:"#93c5fd",fontStyle:"italic",lineHeight:1.6,margin:0}}>"{item.quote}"</p>
-            </div>
-
-            <div style={{fontSize:11,color:"#64748b",fontWeight:700,marginBottom:8,letterSpacing:1,textTransform:"uppercase"}}>Key Takeaways</div>
-            {item.keyPoints.map((pt,j)=>(
-              <div key={j} style={{display:"flex",gap:8,marginBottom:7,alignItems:"flex-start"}}>
-                <span style={{color:item.tagColor,fontSize:10,minWidth:12,paddingTop:3}}>▸</span>
-                <span style={{fontSize:12,color:"#cbd5e1",lineHeight:1.5}}>{pt}</span>
-              </div>
-            ))}
-
-            <a href={item.url} target="_blank" rel="noopener noreferrer" style={{display:"inline-block",marginTop:8,fontSize:11,color:"#475569",textDecoration:"none"}}>
-              🔗 Source: {item.url.replace("https://","").split("/")[0]}
-            </a>
+            )}
           </div>
-        ))}
+        );})}
+
 
         <div style={{background:"#0f172a",border:"1px solid #1e293b",borderRadius:10,padding:14,marginTop:4}}>
           <div style={{fontSize:12,fontWeight:700,color:"#64748b",marginBottom:8}}>📊 Community Consensus — What to Expect</div>
@@ -2188,37 +2307,65 @@ export default function App() {
                   "NOW you are ready to click 'Start the MCFE Exam' — timer begins",
                 ]
               },
-            ].map((phase,pi)=>(
-              <div key={pi} style={{background:"#111827",border:`1px solid ${phase.color}30`,borderRadius:10,padding:14,marginBottom:12}}>
-                <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
-                  <span style={{fontSize:16}}>{phase.icon}</span>
-                  <span style={{fontSize:12,fontWeight:700,color:phase.color}}>{phase.phase}</span>
+            ].map((phase,pi)=>{
+              const key = `cl-${pi}`;
+              const isCollapsed = collapsed[key];
+              return (
+                <div key={pi} style={{background:"#111827",border:`1px solid ${phase.color}30`,borderRadius:10,marginBottom:10,overflow:"hidden"}}>
+                  <button onClick={()=>toggleCollapse(key)} style={{width:"100%",display:"flex",alignItems:"center",gap:8,padding:"12px 14px",background:"transparent",border:"none",cursor:"pointer",textAlign:"left"}}>
+                    <span style={{fontSize:16}}>{phase.icon}</span>
+                    <span style={{fontSize:12,fontWeight:700,color:phase.color,flex:1}}>{phase.phase}</span>
+                    <span style={{fontSize:9,color:"#475569",background:"#0f172a",borderRadius:10,padding:"2px 7px",fontWeight:700}}>{phase.steps.length}</span>
+                    <span style={{color:phase.color,fontSize:12,transform:isCollapsed?"rotate(-90deg)":"rotate(0deg)",transition:"transform 0.2s",display:"inline-block"}}>▾</span>
+                  </button>
+                  {!isCollapsed && (
+                    <div style={{padding:"0 14px 14px"}}>
+                      {phase.steps.map((step,si)=>(
+                        <div key={si} style={{display:"flex",gap:10,marginBottom:7,alignItems:"flex-start"}}>
+                          <div style={{minWidth:20,height:20,borderRadius:"50%",background:`${phase.color}20`,border:`1px solid ${phase.color}40`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:9,color:phase.color,fontWeight:700,flexShrink:0}}>{si+1}</div>
+                          <span style={{fontSize:12,color:"#cbd5e1",lineHeight:1.5}}>{step}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                {phase.steps.map((step,si)=>(
-                  <div key={si} style={{display:"flex",gap:10,marginBottom:7,alignItems:"flex-start"}}>
-                    <div style={{minWidth:20,height:20,borderRadius:"50%",background:`${phase.color}20`,border:`1px solid ${phase.color}40`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:9,color:phase.color,fontWeight:700,flexShrink:0}}>{si+1}</div>
-                    <span style={{fontSize:12,color:"#cbd5e1",lineHeight:1.5}}>{step}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
 
         {/* PRACTICALS TAB */}
         {examTab === "practicals" && (
           <div>
-            <p style={{color:"#475569",fontSize:11,marginBottom:14}}>Scenario-based Q&A built around YOUR actual exam evidence items. Work through each before revealing the answer.</p>
-            {EXAM_PRACTICALS.map((section,si)=>(
-              <div key={si} style={{marginBottom:16}}>
-                <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10,padding:"7px 12px",background:`${section.color}15`,borderRadius:8,border:`1px solid ${section.color}30`}}>
-                  <span style={{fontSize:12,fontWeight:700,color:section.color}}>{section.cat}</span>
-                </div>
-                {section.qs.map((qa,qi)=>(
-                  <ExamQA key={qi} q={qa.q} a={qa.a} color={section.color} />
-                ))}
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
+              <p style={{color:"#475569",fontSize:11,margin:0}}>Scenario Q&A for YOUR exam evidence. Reveal answers after working through each.</p>
+              <div style={{display:"flex",gap:5}}>
+                <button onClick={()=>setCollapsed(p=>{const n={...p};EXAM_PRACTICALS.forEach((_,si)=>{n[`ep-${si}`]=true;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 7px"}}>Collapse</button>
+                <button onClick={()=>setCollapsed(p=>{const n={...p};EXAM_PRACTICALS.forEach((_,si)=>{n[`ep-${si}`]=false;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 7px"}}>Expand</button>
               </div>
-            ))}
+            </div>
+            {EXAM_PRACTICALS.map((section,si)=>{
+              const key = `ep-${si}`;
+              const isCollapsed = collapsed[key];
+              return (
+                <div key={si} style={{marginBottom:10}}>
+                  <button onClick={()=>toggleCollapse(key)} style={{width:"100%",display:"flex",alignItems:"center",gap:8,padding:"8px 12px",background:`${section.color}15`,borderRadius:isCollapsed?"8px":"8px 8px 0 0",border:`1px solid ${section.color}30`,cursor:"pointer",textAlign:"left"}}>
+                    <span style={{fontSize:12,fontWeight:700,color:section.color,flex:1}}>{section.cat}</span>
+                    <span style={{fontSize:9,color:"#475569",background:"#0f172a",borderRadius:10,padding:"2px 7px",fontWeight:700}}>{section.qs.length} Q</span>
+                    <span style={{color:section.color,fontSize:12,transform:isCollapsed?"rotate(-90deg)":"rotate(0deg)",transition:"transform 0.2s",display:"inline-block"}}>▾</span>
+                  </button>
+                  {!isCollapsed && (
+                    <div style={{border:`1px solid ${section.color}20`,borderTop:"none",borderRadius:"0 0 8px 8px",padding:"8px 0 2px"}}>
+                      {section.qs.map((qa,qi)=>(
+                        <div key={qi} style={{padding:"0 0 6px"}}>
+                          <ExamQA q={qa.q} a={qa.a} color={section.color} />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
@@ -2496,19 +2643,28 @@ Answer questions directly, specifically, and concisely. For navigation questions
             {[
               {icon:"💼",title:"You have real-world experience",body:"You're a Cybersecurity Senior Analyst at SABIC leading SOC and Incident Response. You understand digital forensics at an operational level. This exam tests tool proficiency — and you've done the course. That combination is exactly what passes MCFE."},
               {icon:"📖",title:"It's open book",body:"The PDF manual is SEARCHABLE during the exam. Axiom Examine is OPEN during the exam. Your processed case file is OPEN. This is not a memory test — it's an applied skills test. If you forget something, you look it up. That's how real forensics works too."},
-              {icon:"🎯",title:"You've prepared more than most",body:"You have 276 manual entries, 75 practice questions, 12 mind maps, practical scenarios, community intel, a lab reference, and case-specific prep — all built from your actual AX200 manual. Most people walk in with just the course. You've done the work."},
+              {icon:"🎯",title:"You've prepared more than most",body:"You have 276 manual entries, 100 practice questions, 12 mind maps, practical scenarios, community intel, a lab reference, and case-specific prep — all built from your actual AX200 manual. Most people walk in with just the course. You've done the work."},
               {icon:"⏱️",title:"Time is not your enemy",body:"96 seconds per question. Multiple choice or true/false — no essay, no typing long answers. If a practical question requires navigating Axiom, you have 1.5 minutes to click to the artifact and find the value. That's plenty if you know where to look."},
               {icon:"🔁",title:"You can skip and return",body:"Don't know an answer immediately? SKIP IT. Reddit confirmed: skip and return is explicitly allowed. Come back at the end. Never spend 5 minutes on one question when you can answer 3 others in that time."},
               {icon:"🏆",title:"The NDU cohort averaged 92%",body:"17 students from the Notre Dame CDT program sat this exam on the same day. Average score: 92%. That's 12 points above the pass mark. These were students — you're a working senior analyst who has just spent days deeply preparing."},
-            ].map((card,i)=>(
-              <div key={i} style={{background:"#111827",border:"1px solid #1e293b",borderRadius:10,padding:14,marginBottom:8,display:"flex",gap:12,alignItems:"flex-start"}}>
-                <span style={{fontSize:20,flexShrink:0}}>{card.icon}</span>
-                <div>
-                  <div style={{fontSize:13,fontWeight:700,color:"#e2e8f0",marginBottom:5}}>{card.title}</div>
-                  <div style={{fontSize:12,color:"#94a3b8",lineHeight:1.6}}>{card.body}</div>
+            ].map((card,i)=>{
+              const key = `calm-ms-${i}`;
+              const isCollapsed = collapsed[key];
+              return (
+                <div key={i} style={{background:"#111827",border:"1px solid #1e293b",borderRadius:10,marginBottom:7,overflow:"hidden"}}>
+                  <button onClick={()=>toggleCollapse(key)} style={{width:"100%",display:"flex",gap:12,alignItems:"center",padding:"12px 14px",background:"transparent",border:"none",cursor:"pointer",textAlign:"left"}}>
+                    <span style={{fontSize:20,flexShrink:0}}>{card.icon}</span>
+                    <span style={{fontSize:13,fontWeight:700,color:isCollapsed?"#64748b":"#e2e8f0",flex:1}}>{card.title}</span>
+                    <span style={{color:"#334155",fontSize:10}}>{isCollapsed?"▼":"▲"}</span>
+                  </button>
+                  {!isCollapsed && (
+                    <div style={{padding:"0 14px 13px 46px"}}>
+                      <div style={{fontSize:12,color:"#94a3b8",lineHeight:1.6}}>{card.body}</div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
 
@@ -2770,490 +2926,26 @@ Answer questions directly, specifically, and concisely. For navigation questions
       </div>
     );
   }
-
-  // ─── AI AXIOM ASSISTANT ───────────────────────────────────────────────────────
-  if (view === "aiassist") {
-    const SYSTEM_PROMPT = `You are an expert Magnet AXIOM forensic examiner assistant helping a cybersecurity analyst named Yousef prepare for and pass the MCFE (Magnet Certified Forensics Examiner) exam. 
-
-The exam case is: Baldwin/Burgess homicide and classified documents case.
-- Item 1: Dell Latitude Laptop (Brenda Baldwin) - 40.6 GB logical acquisition of C drive
-- Item 2: Google Takeout (BrendaBaldwin420@gmail.com) - 160 MB
-- Item 3: Apple iPhone 12 (Steve Burgess) - 6.35 GB Logical+ acquisition
-
-You have expert knowledge of:
-- Magnet AXIOM Process and Axiom Examine (AX200 v2604 course)
-- All Windows OS artifacts: Prefetch (naming: APPNAME.HASH.pf, max entries XP=126/Vista-8=129/Win10-11=1024, XPRESS HUFFMAN compression on Win10+), Registry hives (SAM/SOFTWARE/SYSTEM/NTUSER.DAT), ShutdownTime (8-byte Windows 64-bit LE timestamp in SYSTEM hive ControlSet###\\Control\\Windows), User Accounts (SAM+SOFTWARE hives), USB Devices (CONNECTED DEVICES category, sources: SOFTWARE/SYSTEM/setupapi.dev.log/NTUSER.DAT/Event Logs)
-- Browser forensics: Chrome cache (AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache - content and metadata SEPARATE), Firefox cache (AppData\\LOCAL NOT Roaming, metadata APPENDED to file), Firefox bookmarks (places.sqlite in Roaming - tables moz_places+moz_bookmarks)
-- Email: Email Explorer Participants filter is CASE SENSITIVE, Email Attachments artifact aggregates ALL attachments, OST=compound file (preview may be blank - use TEXT AND HEX card)
-- Cloud: OneDrive local vs Cloud OneDrive Files (cloud shows sharing info, may have files not stored locally), Dropbox artifact fields (File ID, Version ID, server/client timestamps), Passwords/Tokens (people reuse passwords - try against encrypted files)
-- Media: Hit Stacking (same MD5/SHA1 = one stack, tag one = tags ALL copies), Quick Preview (hover video + drag L→R to scrub), Filmstrip (still frames every 10% of video)
-- Connections Explorer: answers WHO WHAT WHEN WHERE WHY HOW, build via Tools→Build Connections
-- Filters bar turns YELLOW when active, criteria in bold
-- Mobile View: apps NOT in original device order, iOS supported types: AFU/FFS (Graykey/Verakey)/UFED Premium, Android: FFS/AFU/Logical+/UFED Premium
-- Case files use .MFDB extension (SQL database)
-- REFINED RESULTS: Profiles created ONLY from Identifiers-People AND Identifiers-Devices
-- Google Searches=Google only, Parsed Search Queries=all other search engines
-- Email keyword search from Filters bar = searches ALL PARTS of email
-- Document content shown in PREVIEW CARD in DETAILS PANE
-- Created Date vs File System Created Date are different things
-- Axiom timestamps: millisecond precision (3 decimal places)
-- MCFE exam: 75 questions, 120 minutes, 80% pass mark, open book (PDF searchable), open case file
-- Artifact Reference: Help→Documentation→Artifact Reference
-
-Answer questions directly, specifically, and concisely. For navigation questions, give the exact path (category → subcategory → artifact name). For "where is" questions, give the exact location in Axiom Examine. Be direct like a colleague next to them in the exam room. Max 150 words per answer unless a detailed walkthrough is needed. If asked something case-specific (Baldwin/Burgess), apply your knowledge to that specific evidence scenario.`;
-
-    const sendMessage = async () => {
-      if (!aiInput.trim() || aiLoading) return;
-      const userMsg = aiInput.trim();
-      setAiInput("");
-      setAiMessages(prev => [...prev, { role: "user", content: userMsg }]);
-      setAiLoading(true);
-      try {
-        const history = [...aiMessages, { role: "user", content: userMsg }];
-        const response = await fetch("https://api.anthropic.com/v1/messages", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            model: "claude-sonnet-4-20250514",
-            max_tokens: 1000,
-            system: SYSTEM_PROMPT,
-            messages: history.map(m => ({ role: m.role, content: m.content })),
-          })
-        });
-        const data = await response.json();
-        const reply = data.content?.map(b => b.text || "").join("") || "No response received.";
-        setAiMessages(prev => [...prev, { role: "assistant", content: reply }]);
-      } catch (err) {
-        setAiMessages(prev => [...prev, { role: "assistant", content: "Error connecting to AI. Check your connection and try again." }]);
-      }
-      setAiLoading(false);
-    };
-
-    const QUICK_QS = [
-      "Where is the Email Attachments artifact?",
-      "How do I find USB devices connected to Baldwin's laptop?",
-      "Email Participants filter — case sensitive?",
-      "Where is Prefetch in Axiom Examine?",
-      "How do I build Connections?",
-      "What's the difference between OneDrive and Cloud OneDrive Files?",
-      "Where is shutdown time in the registry?",
-      "How do I find what apps Burgess ran on his iPhone?",
-      "Where are Google Searches vs Parsed Search Queries?",
-      "How do I find files recently accessed in Windows Explorer?",
-      "Where is the Artifact Reference?",
-      "What does the Filters bar turning yellow mean?",
-    ];
-
-    return (
-      <div style={S.root}>
-        <button style={S.back} onClick={()=>setView("home")}>← Back</button>
-        <div style={{marginBottom:14}}>
-          <h2 style={{...S.ptitle,marginBottom:4}}>🤖 AI AXIOM Assistant</h2>
-          <p style={{color:"#475569",fontSize:11,margin:0}}>Ask anything about AXIOM, the Baldwin/Burgess case, or exam navigation. Powered by Claude — your expert examiner in your pocket.</p>
-        </div>
-
-        {/* Quick question chips */}
-        {aiMessages.length === 0 && (
-          <div style={{marginBottom:14}}>
-            <div style={{fontSize:11,color:"#475569",marginBottom:8,letterSpacing:1,textTransform:"uppercase"}}>Quick questions</div>
-            <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
-              {QUICK_QS.map((q,i)=>(
-                <button key={i} style={{padding:"5px 10px",borderRadius:14,background:"#111827",border:"1px solid #1e293b",color:"#60a5fa",cursor:"pointer",fontSize:11,textAlign:"left"}} onClick={()=>{setAiInput(q);}}>
-                  {q}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Message thread */}
-        <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:14,minHeight:200}}>
-          {aiMessages.length === 0 && (
-            <div style={{textAlign:"center",padding:"24px 0",color:"#475569"}}>
-              <div style={{fontSize:28,marginBottom:8}}>🤖</div>
-              <div style={{fontSize:13,color:"#64748b"}}>Ask me anything about AXIOM or the exam</div>
-              <div style={{fontSize:11,color:"#475569",marginTop:4}}>I know the full AX200 manual and your Baldwin/Burgess case</div>
-            </div>
-          )}
-          {aiMessages.map((msg, i) => (
-            <div key={i} style={{display:"flex",gap:10,alignItems:"flex-start",flexDirection:msg.role==="user"?"row-reverse":"row"}}>
-              <div style={{minWidth:28,height:28,borderRadius:"50%",background:msg.role==="user"?"#0ea5e920":"#a78bfa20",border:`1px solid ${msg.role==="user"?"#0ea5e9":"#a78bfa"}40`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,flexShrink:0}}>
-                {msg.role==="user"?"👤":"🤖"}
-              </div>
-              <div style={{background:msg.role==="user"?"#0ea5e915":"#111827",border:`1px solid ${msg.role==="user"?"#0ea5e930":"#1e293b"}`,borderRadius:msg.role==="user"?"12px 12px 4px 12px":"12px 12px 12px 4px",padding:"10px 13px",maxWidth:"85%"}}>
-                <div style={{fontSize:12,color:msg.role==="user"?"#bae6fd":"#cbd5e1",lineHeight:1.6,whiteSpace:"pre-wrap"}}>{msg.content}</div>
-              </div>
-            </div>
-          ))}
-          {aiLoading && (
-            <div style={{display:"flex",gap:10,alignItems:"center"}}>
-              <div style={{minWidth:28,height:28,borderRadius:"50%",background:"#a78bfa20",border:"1px solid #a78bfa40",display:"flex",alignItems:"center",justifyContent:"center",fontSize:12}}>🤖</div>
-              <div style={{background:"#111827",border:"1px solid #1e293b",borderRadius:"12px 12px 12px 4px",padding:"10px 14px"}}>
-                <div style={{display:"flex",gap:4}}>
-                  {[0,1,2].map(j=>(<div key={j} style={{width:6,height:6,borderRadius:"50%",background:"#a78bfa",animation:`pulse ${0.6+j*0.2}s ease-in-out infinite alternate`}}/>))}
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Input */}
-        <div style={{position:"sticky",bottom:0,background:"#0a0f1e",paddingTop:8,paddingBottom:8}}>
-          <div style={{display:"flex",gap:8}}>
-            <input
-              type="text"
-              placeholder="Ask about AXIOM, the Baldwin/Burgess case, exam navigation..."
-              value={aiInput}
-              onChange={e=>setAiInput(e.target.value)}
-              onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessage();}}}
-              style={{flex:1,padding:"11px 14px",background:"#111827",border:"1px solid #1e293b",borderRadius:8,color:"#e2e8f0",fontSize:13,fontFamily:"'Courier New',monospace",outline:"none"}}
-              autoComplete="off" autoCorrect="off"
-            />
-            <button onClick={sendMessage} disabled={aiLoading||!aiInput.trim()} style={{padding:"11px 16px",background:aiLoading||!aiInput.trim()?"#1e293b":"#0ea5e9",color:aiLoading||!aiInput.trim()?"#475569":"#0a0f1e",border:"none",borderRadius:8,cursor:aiLoading||!aiInput.trim()?"not-allowed":"pointer",fontSize:14,fontWeight:700,flexShrink:0}}>
-              {aiLoading?"...":"→"}
-            </button>
-          </div>
-          {aiMessages.length > 0 && (
-            <button onClick={()=>setAiMessages([])} style={{fontSize:10,color:"#475569",background:"none",border:"none",cursor:"pointer",padding:"6px 0",display:"block"}}>
-              Clear conversation
-            </button>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  // ─── EXAM DAY CALM MODE ───────────────────────────────────────────────────────
-  if (view === "calm") {
-    return (
-      <div style={S.root}>
-        <button style={S.back} onClick={()=>setView("home")}>← Back</button>
-
-        {/* Header */}
-        <div style={{textAlign:"center",padding:"8px 0 20px"}}>
-          <div style={{fontSize:36,marginBottom:8}}>🧠</div>
-          <h2 style={{fontSize:22,fontWeight:800,color:"#e2e8f0",margin:"0 0 6px"}}>Youve Got This, Yousef</h2>
-          <p style={{color:"#64748b",fontSize:12,margin:0}}>Everything you need to walk into the exam calm and ready</p>
-        </div>
-
-        {/* Tabs */}
-        <div style={{display:"flex",gap:5,marginBottom:16,overflowX:"auto",paddingBottom:4}}>
-          {[
-            {id:"mindset",label:"🧠 Mindset",c:"#0ea5e9"},
-            {id:"facts",label:"📊 The Facts",c:"#00d4a0"},
-            {id:"cheatsheet",label:"⚡ Cheat Sheet",c:"#f59e0b"},
-            {id:"navigation",label:"🗺️ Navigation",c:"#a78bfa"},
-            {id:"stuck",label:"🆘 If Stuck",c:"#f87171"},
-          ].map(t=>(
-            <button key={t.id} style={{padding:"6px 12px",borderRadius:20,border:`1px solid ${calmTab===t.id?t.c:"#1e293b"}`,background:calmTab===t.id?`${t.c}20`:"transparent",color:calmTab===t.id?t.c:"#64748b",cursor:"pointer",fontSize:11,fontWeight:calmTab===t.id?700:400,whiteSpace:"nowrap",flexShrink:0}} onClick={()=>setCalmTab(t.id)}>
-              {t.label}
-            </button>
-          ))}
-        </div>
-
-        {/* MINDSET */}
-        {calmTab === "mindset" && (
-          <div>
-            <div style={{background:"linear-gradient(135deg,#0f2027,#203a43)",border:"1px solid #0ea5e940",borderRadius:12,padding:18,marginBottom:12,textAlign:"center"}}>
-              <div style={{fontSize:14,color:"#94a3b8",lineHeight:1.8}}>
-                The Reddit community — experienced DFIR practitioners who sat this exam — called it:<br/>
-                <span style={{color:"#00d4a0",fontWeight:700,fontSize:16}}>"Pretty basic. No ultra technical questions."</span><br/>
-                <span style={{color:"#00d4a0",fontWeight:700,fontSize:16}}>"Way easier than SANS."</span><br/>
-                <span style={{color:"#00d4a0",fontWeight:700,fontSize:16}}>"Not difficult."</span>
-              </div>
-            </div>
-
-            {[
-              {icon:"💼",title:"You have real-world experience",body:"You're a Cybersecurity Senior Analyst at SABIC leading SOC and Incident Response. You understand digital forensics at an operational level. This exam tests tool proficiency — and you've done the course. That combination is exactly what passes MCFE."},
-              {icon:"📖",title:"It's open book",body:"The PDF manual is SEARCHABLE during the exam. Axiom Examine is OPEN during the exam. Your processed case file is OPEN. This is not a memory test — it's an applied skills test. If you forget something, you look it up. That's how real forensics works too."},
-              {icon:"🎯",title:"You've prepared more than most",body:"You have 276 manual entries, 75 practice questions, 12 mind maps, practical scenarios, community intel, a lab reference, and case-specific prep — all built from your actual AX200 manual. Most people walk in with just the course. You've done the work."},
-              {icon:"⏱️",title:"Time is not your enemy",body:"96 seconds per question. Multiple choice or true/false — no essay, no typing long answers. If a practical question requires navigating Axiom, you have 1.5 minutes to click to the artifact and find the value. That's plenty if you know where to look."},
-              {icon:"🔁",title:"You can skip and return",body:"Don't know an answer immediately? SKIP IT. Reddit confirmed: skip and return is explicitly allowed. Come back at the end. Never spend 5 minutes on one question when you can answer 3 others in that time."},
-              {icon:"🏆",title:"The NDU cohort averaged 92%",body:"17 students from the Notre Dame CDT program sat this exam on the same day. Average score: 92%. That's 12 points above the pass mark. These were students — you're a working senior analyst who has just spent days deeply preparing."},
-            ].map((card,i)=>(
-              <div key={i} style={{background:"#111827",border:"1px solid #1e293b",borderRadius:10,padding:14,marginBottom:8,display:"flex",gap:12,alignItems:"flex-start"}}>
-                <span style={{fontSize:20,flexShrink:0}}>{card.icon}</span>
-                <div>
-                  <div style={{fontSize:13,fontWeight:700,color:"#e2e8f0",marginBottom:5}}>{card.title}</div>
-                  <div style={{fontSize:12,color:"#94a3b8",lineHeight:1.6}}>{card.body}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* THE FACTS */}
-        {calmTab === "facts" && (
-          <div>
-            <div style={{background:"#111827",border:"1px solid #1e293b",borderRadius:10,padding:14,marginBottom:12}}>
-              <div style={{fontSize:12,fontWeight:700,color:"#00d4a0",marginBottom:12}}>📊 What the exam actually looks like</div>
-              {[
-                ["Total questions","75 — multiple choice + true/false"],
-                ["Time allowed","120 minutes (96 sec/question average)"],
-                ["Pass mark","80% = 60 correct out of 75"],
-                ["Format","Open book · Open Axiom case · Open PDF manual"],
-                ["Question split","~50% practical from your case · ~25% program functions · ~25% settings"],
-                ["Fail attempt 1","Immediate 2nd attempt — no waiting"],
-                ["Fail attempt 2","60-day wait, then try again"],
-                ["If you pass","Certificate mailed to you (embossed, frame-worthy)"],
-                ["Certification valid","2 years"],
-                ["Community avg score","92% (Notre Dame CDT Program, 2022)"],
-              ].map(([k,v],i)=>(
-                <div key={i} style={{display:"flex",justifyContent:"space-between",padding:"8px 0",borderBottom:"1px solid #1e293b",gap:12,flexWrap:"wrap"}}>
-                  <span style={{fontSize:12,color:"#64748b"}}>{k}</span>
-                  <span style={{fontSize:12,color:"#e2e8f0",fontWeight:700,textAlign:"right"}}>{v}</span>
-                </div>
-              ))}
-            </div>
-
-            <div style={{background:"#111827",border:"1px solid #1e293b",borderRadius:10,padding:14,marginBottom:12}}>
-              <div style={{fontSize:12,fontWeight:700,color:"#fbbf24",marginBottom:12}}>🎯 What practical questions look like</div>
-              <p style={{fontSize:12,color:"#94a3b8",marginBottom:10,lineHeight:1.6}}>Practical questions ask you to look something up IN YOUR PROCESSED CASE FILE. Examples:</p>
-              {[
-                "What is the last shutdown time of Brenda Baldwin's laptop?",
-                "What is the MD5 hash of [specific file] found on the laptop?",
-                "How many times was [application] run on the device?",
-                "What email address sent the attachment titled [filename]?",
-                "What was the first connection date of the USB device named [X]?",
-                "What cloud service did Baldwin access on [date]?",
-              ].map((ex,i)=>(
-                <div key={i} style={{display:"flex",gap:8,marginBottom:6,alignItems:"flex-start"}}>
-                  <span style={{color:"#fbbf24",fontSize:10,minWidth:14,paddingTop:3}}>Q</span>
-                  <span style={{fontSize:12,color:"#cbd5e1",fontStyle:"italic"}}>{ex}</span>
-                </div>
-              ))}
-              <div style={{marginTop:10,padding:"8px 10px",background:"#0f172a",borderRadius:6,fontSize:12,color:"#00d4a0"}}>
-                ✓ Answer: navigate to the artifact in Axiom → check the Details pane → done.
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* CHEAT SHEET */}
-        {calmTab === "cheatsheet" && (
-          <div>
-            <p style={{color:"#475569",fontSize:11,marginBottom:12}}>The most commonly tested facts. Read once before you start the exam timer.</p>
-            {[
-              {
-                title:"🔴 These are CASE SENSITIVE",color:"#f87171",
-                items:["Email Explorer → Participants filter (Sender/Recipient) — CASE SENSITIVE","Type 'Jones' not 'jones' — will not match otherwise"]
-              },
-              {
-                title:"🟡 Filters Bar = YELLOW when active",color:"#fbbf24",
-                items:["Yellow bar = not all artifacts visible","Filtered criteria shown in BOLD","Always check for active filters before concluding 'no results'"]
-              },
-              {
-                title:"🟢 Key Numbers to Remember",color:"#00d4a0",
-                items:["Prefetch max: XP=126 | Vista/7/8=129 | Win10/11=1024","MCFE: 75 questions | 120 min | 80% pass | 2-year validity","Fail twice → 60-day lockout","Max threads: 32 (one physical CPU at a time)","Filmstrip: still frames at every 10% of video"]
-              },
-              {
-                title:"🔵 Key Navigation Shortcuts",color:"#0ea5e9",
-                items:["F1 = User Guide / Artifact Reference / What's New","Help → Documentation → Artifact Reference (know this cold)","Tools → Build Connections (do this before exam timer)","Tools → Build Timeline (do this before exam timer)","Process → Add new evidence to case (from within Examine)"]
-              },
-              {
-                title:"🟣 Easy to Confuse — Don't Mix These Up",color:"#a78bfa",
-                items:["Google Searches = Google ONLY | Parsed Search Queries = everything else","OneDrive (local) = no sharing info | Cloud OneDrive Files = shows sharing info","Parsed artifact = structured extraction | Carved artifact = from unallocated space","Identifiers–People = email/chat/screen names | Identifiers–Device = hardware IDs","Rebuilt Desktop = Windows 10 ONLY (not 7, not 8, not 11)"]
-              },
-              {
-                title:"⚡ Things Worth A LOT in the Exam",color:"#f59e0b",
-                items:["Profiles created ONLY from Identifiers–People AND Identifiers–Device","Email Attachments artifact = ALL attachments from ALL emails in one place","Hit Stacking: tag one = tags ALL copies across ALL evidence","BitLocker: find Recovery Key in Axiom Examine FIRST, then enter in Process","Connections Explorer: WHO WHAT WHEN WHERE WHY HOW — built via Tools→Build Connections"]
-              },
-            ].map((section,i)=>(
-              <div key={i} style={{background:"#111827",borderLeft:`3px solid ${section.color}`,borderRadius:"0 8px 8px 0",padding:"11px 13px",marginBottom:8}}>
-                <div style={{fontSize:12,fontWeight:700,color:section.color,marginBottom:8}}>{section.title}</div>
-                {section.items.map((item,j)=>(
-                  <div key={j} style={{display:"flex",gap:7,marginBottom:5,alignItems:"flex-start"}}>
-                    <span style={{color:section.color,fontSize:9,minWidth:8,paddingTop:4}}>▸</span>
-                    <span style={{fontSize:11,color:"#cbd5e1",lineHeight:1.5}}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* NAVIGATION GUIDE */}
-        {calmTab === "navigation" && (
-          <div>
-            <p style={{color:"#475569",fontSize:11,marginBottom:12}}>Exact navigation paths for the most common exam question types. Memorise these flows.</p>
-            {[
-              {q:"Where was this file accessed?",path:"Refined Results → Locally Accessed Files and Folders",note:"Source: WebCacheV01.dat. Look for Windows Explorer paths.",color:"#0ea5e9"},
-              {q:"When was the OS last shut down?",path:"Operating System → Operating System Information → Last Shutdown Date/Time",note:"Source: ShutdownTime in SYSTEM hive. Verify with Registry Explorer DECODE card.",color:"#0ea5e9"},
-              {q:"What applications were run?",path:"Operating System → Prefetch Files – Windows 8/10/11",note:"App name + run count + last 8 launch times. System-wide, not user-specific.",color:"#0ea5e9"},
-              {q:"What USB devices were connected?",path:"Connected Devices → USB Devices",note:"First connection time, device name, drive letter, associated user profile.",color:"#a78bfa"},
-              {q:"What was searched on Google?",path:"Refined Results → Google Searches",note:"Google only. For Bing/Yahoo/other: Refined Results → Parsed Search Queries.",color:"#a78bfa"},
-              {q:"What was browsed on Chrome?",path:"Web Related → Chrome Browser Visits",note:"Source: AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",color:"#a78bfa"},
-              {q:"What emails were sent/received?",path:"Explorer dropdown → Email Explorer",note:"CASE SENSITIVE participants filter. Check Email & Calendar → Email Attachments for all attached files.",color:"#00d4a0"},
-              {q:"What files were attached to emails?",path:"Email & Calendar → Email Attachments",note:"ALL attachments from ALL email sources in one place. 'Original Artifact' link → parent email.",color:"#00d4a0"},
-              {q:"What cloud files exist?",path:"Cloud Storage → [OneDrive/Dropbox/Google Drive]",note:"Cloud OneDrive Files = acquired from cloud, shows sharing. Local OneDrive = sync folder only.",color:"#00d4a0"},
-              {q:"What are the connections between evidence?",path:"Explorer dropdown → Connections Explorer",note:"Build via Tools→Build Connections. Shows WHO WHAT WHEN WHERE WHY HOW relationships.",color:"#f59e0b"},
-              {q:"What is the Windows build / OS version?",path:"Operating System → Operating System Information",note:"Source: SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion. Check ProductName + CurrentBuild.",color:"#f59e0b"},
-              {q:"What user accounts exist on the device?",path:"Operating System → User Accounts – Windows",note:"Source: SAM + SOFTWARE hives. Shows SID, RID, last login, profile path.",color:"#f59e0b"},
-              {q:"What is the hash of a specific file?",path:"File System Explorer → navigate to file → Details pane → ARTIFACT INFORMATION",note:"Or in any artifact's EVIDENCE INFORMATION card. MD5 and SHA1 shown.",color:"#f87171"},
-              {q:"What texts/iMessages were on the iPhone?",path:"Communications → SMS/MMS Messages",note:"Source: sms.db. Contains iMessages and SMS. Shows content, timestamps, thread structure.",color:"#f87171"},
-              {q:"Where is the Artifact Reference?",path:"Help → Documentation → Artifact Reference",note:"Lists ALL artifacts, their column meanings, and source locations. USE DURING EXAM.",color:"#f87171"},
-            ].map((item,i)=>(
-              <div key={i} style={{background:"#111827",borderRadius:8,padding:"10px 12px",marginBottom:7,borderLeft:`3px solid ${item.color}`}}>
-                <div style={{fontSize:11,color:"#64748b",marginBottom:3,fontStyle:"italic"}}>"{item.q}"</div>
-                <div style={{fontSize:12,fontWeight:700,color:item.color,marginBottom:3}}>→ {item.path}</div>
-                <div style={{fontSize:11,color:"#64748b",lineHeight:1.4}}>{item.note}</div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* IF STUCK */}
-        {calmTab === "stuck" && (
-          <div>
-            <div style={{background:"#111827",border:"1px solid #f8717130",borderRadius:10,padding:14,marginBottom:12}}>
-              <div style={{fontSize:13,fontWeight:700,color:"#f87171",marginBottom:12}}>🆘 First rule: BREATHE. Then follow this.</div>
-              {[
-                {step:"1",title:"Can't find the artifact?",action:"Type a keyword from the question into the global SEARCH bar in Axiom Examine (Filters bar). It will search across ALL artifact types. Also try the Artifact Reference: Help → Documentation → Artifact Reference.",color:"#0ea5e9"},
-                {step:"2",title:"Not sure what the question is asking?",action:"Open the PDF manual (Ctrl+F) and search the key term from the question. It will jump to the relevant section. The manual explains every artifact category.",color:"#a78bfa"},
-                {step:"3",title:"Confused about an artifact field/column?",action:"Artifact Reference: Help → Documentation → Artifact Reference. Find the artifact name, read what each column means. This is specifically designed for moments like this.",color:"#00d4a0"},
-                {step:"4",title:"Practical question — can't find the value?",action:"Check: (1) Is a filter active? (Filters bar yellow = filtered view). (2) Are you in the right evidence source? (3) Try right-click → Filter on Column on a related value to narrow down.",color:"#f59e0b"},
-                {step:"5",title:"Running out of time?",action:"SKIP the question. Mark it mentally. Answer everything else first. Return to skipped questions at the end. 1 uncertain answer costs less than 3 answers rushed.",color:"#f87171"},
-                {step:"6",title:"Mind going blank?",action:"Stop. Look at the question category (it's multiple choice — one of the 4 answers is right). Eliminate what's obviously wrong. You now have a 50/50 at worst. Make your best choice and move on. Don't freeze.",color:"#fbbf24"},
-              ].map((item,i)=>(
-                <div key={i} style={{display:"flex",gap:12,marginBottom:12,alignItems:"flex-start"}}>
-                  <div style={{minWidth:26,height:26,borderRadius:"50%",background:`${item.color}20`,border:`1px solid ${item.color}50`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,color:item.color,fontWeight:700,flexShrink:0}}>{item.step}</div>
-                  <div>
-                    <div style={{fontSize:12,fontWeight:700,color:"#e2e8f0",marginBottom:4}}>{item.title}</div>
-                    <div style={{fontSize:12,color:"#94a3b8",lineHeight:1.6}}>{item.action}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{background:"#0f172a",border:"1px solid #1e293b",borderRadius:10,padding:14,textAlign:"center"}}>
-              <div style={{fontSize:24,marginBottom:8}}>💪</div>
-              <div style={{fontSize:14,fontWeight:700,color:"#e2e8f0",marginBottom:8}}>Remember why youre doing this</div>
-              <div style={{fontSize:12,color:"#64748b",lineHeight:1.7}}>
-                You work at SABIC as a Senior Cybersecurity Analyst leading SOC and Incident Response across the Greater China Region.<br/>
-                You have real-world DFIR experience that most exam-takers dont.<br/>
-                This certification <span style={{color:"#00d4a0",fontWeight:700}}>validates what you already know.</span><br/><br/>
-                <span style={{color:"#fbbf24",fontWeight:700}}>You didnt come this far to stop here.</span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <button style={{...S.primary,marginTop:16}} onClick={()=>setView("home")}>← Back to Home</button>
-      </div>
-    );
-  }
-
-
-  // ─── RUNNING EXERCISES ────────────────────────────────────────────────────
-  if (view === "exercises") {
-    const ex = EXERCISES[exIdx];
-    return (
-      <div style={S.root}>
-        <button style={S.back} onClick={()=>setView("home")}>Back</button>
-        <div style={{marginBottom:12}}>
-          <h2 style={{...S.ptitle,marginBottom:4}}>📘 Manual Exercises</h2>
-          <p style={{color:"#475569",fontSize:11,margin:0}}>All AX200 manual exercises — running exercises per sub-module + student exercises — exact steps and model answers.</p>
-        </div>
-        <div style={{display:"flex",gap:4,marginBottom:12,overflowX:"auto",paddingBottom:4}}>
-          {EXERCISES.map((e,i)=>(
-            <button key={i} style={{padding:"4px 9px",borderRadius:12,border:`1px solid ${exIdx===i?e.color:"#1e293b"}`,background:exIdx===i?`${e.color}20`:"transparent",color:exIdx===i?e.color:"#64748b",cursor:"pointer",fontSize:10,whiteSpace:"nowrap",flexShrink:0,fontWeight:exIdx===i?700:400}}
-              onClick={()=>{setExIdx(i);setExTab("intent");}}>
-              M{e.mod} {e.title.split(" ").slice(0,3).join(" ")}
-            </button>
-          ))}
-        </div>
-        <div style={{background:`${ex.color}12`,border:`1px solid ${ex.color}40`,borderRadius:10,padding:"12px 14px",marginBottom:10}}>
-          <div style={{display:"flex",justifyContent:"space-between",marginBottom:5}}>
-            <div style={{display:"flex",gap:5}}>
-              <span style={{fontSize:9,background:`${ex.color}20`,color:ex.color,padding:"2px 7px",borderRadius:10,fontWeight:700}}>MODULE {ex.mod}</span>
-              <span style={{fontSize:9,background:"#1e293b",color:"#64748b",padding:"2px 7px",borderRadius:10}}>{ex.category}</span>
-            </div>
-            <span style={{fontSize:10,color:"#475569"}}>{exIdx+1} of {EXERCISES.length}</span>
-          </div>
-          <div style={{fontSize:14,fontWeight:800,color:"#e2e8f0",marginBottom:5}}>{ex.title}</div>
-          <div style={{fontSize:11,color:"#94a3b8",lineHeight:1.5}}><span style={{color:ex.color,fontWeight:600}}>Objective: </span>{ex.objective}</div>
-        </div>
-        <div style={{display:"flex",gap:4,marginBottom:12,overflowX:"auto",paddingBottom:2}}>
-          {[
-            {id:"intent",label:"Why It Matters",icon:"🎯"},
-            {id:"manual",label:"Manual Steps",icon:"📋"},
-            {id:"student",label:"Student Exercises",icon:"🧠"},
-            {id:"tricks",label:"Tricks and Traps",icon:"💡"},
-            {id:"exam",label:"Exam Relevance",icon:"🎓"},
-          ].map(t=>(
-            <button key={t.id} style={{padding:"5px 10px",borderRadius:14,border:`1px solid ${exTab===t.id?ex.color:"#1e293b"}`,background:exTab===t.id?`${ex.color}20`:"transparent",color:exTab===t.id?ex.color:"#64748b",cursor:"pointer",fontSize:11,fontWeight:exTab===t.id?700:400,whiteSpace:"nowrap",flexShrink:0}}
-              onClick={()=>setExTab(t.id)}>
-              {t.icon} {t.label}
-            </button>
-          ))}
-        </div>
-        {exTab === "intent" && (
-          <div style={{background:"#0a0f1e",border:`1px solid ${ex.color}30`,borderRadius:10,padding:14,marginBottom:10}}>
-            <div style={{fontSize:11,color:ex.color,fontWeight:700,marginBottom:8,letterSpacing:1}}>WHY THIS EXERCISE EXISTS</div>
-            <p style={{fontSize:12,color:"#cbd5e1",lineHeight:1.7,margin:0}}>{ex.intent}</p>
-          </div>
-        )}
-        {exTab === "manual" && (
-          <div>
-            <div style={{fontSize:10,color:"#64748b",marginBottom:10,padding:"4px 8px",background:"#1e293b",borderRadius:5,display:"inline-block"}}>Exact steps from the AX200 manual</div>
-            {ex.manualSteps.map((step,i)=>(
-              <div key={i} style={{display:"flex",gap:10,marginBottom:9,alignItems:"flex-start",background:"#111827",borderRadius:7,padding:"9px 12px",borderLeft:`3px solid ${ex.color}`}}>
-                <div style={{minWidth:22,height:22,borderRadius:"50%",background:`${ex.color}20`,border:`1px solid ${ex.color}50`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,color:ex.color,fontWeight:800,flexShrink:0}}>{i+1}</div>
-                <span style={{fontSize:12,color:"#cbd5e1",lineHeight:1.55}}>{step}</span>
-              </div>
-            ))}
-          </div>
-        )}
-        {exTab === "student" && (
-          <div>
-            <div style={{fontSize:10,color:"#64748b",marginBottom:10,padding:"4px 8px",background:"#1e293b",borderRadius:5,display:"inline-block"}}>Practice questions with full model answers</div>
-            {ex.studentExercises.map((item,i)=>(
-              <ExamQA key={i} q={item.q} a={item.a} color={ex.color} />
-            ))}
-          </div>
-        )}
-        {exTab === "tricks" && (
-          <div>
-            <div style={{fontSize:10,color:"#64748b",marginBottom:10,padding:"4px 8px",background:"#1e293b",borderRadius:5,display:"inline-block"}}>Details not mentioned anywhere else in the course</div>
-            {ex.tricks.map((trick,i)=>(
-              <div key={i} style={{background:"#071a00",border:"1px solid #00d4a030",borderRadius:8,padding:"11px 13px",marginBottom:8}}>
-                <div style={{display:"flex",gap:7,alignItems:"flex-start",marginBottom:6}}>
-                  <span style={{fontSize:14,flexShrink:0}}>💡</span>
-                  <span style={{fontSize:12,fontWeight:700,color:"#00d4a0"}}>{trick.label}</span>
-                </div>
-                <div style={{fontSize:11,color:"#86efac",lineHeight:1.65,paddingLeft:22}}>{trick.detail}</div>
-              </div>
-            ))}
-          </div>
-        )}
-        {exTab === "exam" && (
-          <div style={{background:"#0a001a",border:"1px solid #a78bfa30",borderRadius:10,padding:14}}>
-            <div style={{fontSize:11,color:"#a78bfa",fontWeight:700,marginBottom:8,letterSpacing:1}}>WHAT THE EXAM TESTS FROM THIS EXERCISE</div>
-            <p style={{fontSize:12,color:"#c4b5fd",lineHeight:1.7,margin:0}}>{ex.examRelevance}</p>
-          </div>
-        )}
-        <div style={{...S.navrow,marginTop:12}}>
-          <button style={{...S.navbtn,opacity:exIdx===0?0.4:1}} onClick={()=>{setExIdx(p=>Math.max(0,p-1));setExTab("intent");}} disabled={exIdx===0}>Previous</button>
-          <button style={{...S.navbtn,opacity:exIdx===EXERCISES.length-1?0.4:1}} onClick={()=>{setExIdx(p=>Math.min(EXERCISES.length-1,p+1));setExTab("intent");}} disabled={exIdx===EXERCISES.length-1}>Next</button>
-        </div>
-        <button style={{...S.primary,marginTop:10}} onClick={()=>setView("home")}>Back to Home</button>
-      </div>
-    );
-  }
-
-
   // LAB REFERENCE
   if (view === "labref") {
+    const lq = labSearch.toLowerCase();
+    const fArtifacts = LAB_REF.artifacts.map(cat=>({...cat,items:cat.items.filter(item=>!lq||[item.name,item.meaning||"",item.identifies||"",item.supports||"",item.interpret||"",item.notes||"",item.path,item.source].join(" ").toLowerCase().includes(lq))})).filter(cat=>cat.items.length>0);
+    const fRegistry = LAB_REF.registry.filter(r=>!lq||[r.hive,r.key,r.artifact,r.contains,r.forensic||""].join(" ").toLowerCase().includes(lq));
+    const fPaths = LAB_REF.paths.map(s=>({...s,entries:s.entries.filter(e=>!lq||[s.category,e.label,e.path,e.files].join(" ").toLowerCase().includes(lq))})).filter(s=>s.entries.length>0);
+    const fPlaybooks = LAB_REF.playbooks.filter(pb=>!lq||[pb.title,...pb.steps.map(s=>s.action+" "+s.detail)].join(" ").toLowerCase().includes(lq));
+    const fQuickref = LAB_REF.quickref.filter(sec=>!lq||[sec.title,...sec.items.map(i=>i.key+" "+i.action)].join(" ").toLowerCase().includes(lq));
+    const noResults = lq && labTab==="artifacts" && fArtifacts.length===0 || lq && labTab==="registry" && fRegistry.length===0 || lq && labTab==="paths" && fPaths.length===0 || lq && labTab==="playbooks" && fPlaybooks.length===0 || lq && labTab==="quickref" && fQuickref.length===0;
+
     return (
       <div style={S.root}>
         <button style={S.back} onClick={()=>setView("home")}>← Back</button>
-        <div style={{marginBottom:16}}>
+        <div style={{marginBottom:12}}>
           <h2 style={{...S.ptitle,marginBottom:4}}>🔬 DFIR Lab Manual Reference</h2>
           <p style={{color:"#475569",fontSize:11,margin:0}}>Quick-reference for live AXIOM investigations · AX200 v2604</p>
         </div>
 
         {/* Tab bar */}
-        <div style={{display:"flex",gap:5,marginBottom:16,overflowX:"auto",paddingBottom:4}}>
+        <div style={{display:"flex",gap:5,marginBottom:10,overflowX:"auto",paddingBottom:4}}>
           {[
             {id:"artifacts",label:"📂 Artifacts",c:"#0ea5e9"},
             {id:"registry",label:"🗃️ Registry",c:"#a78bfa"},
@@ -3267,58 +2959,90 @@ Answer questions directly, specifically, and concisely. For navigation questions
           ))}
         </div>
 
+        {/* Search bar */}
+        <div style={{position:"relative",marginBottom:12}}>
+          <span style={{position:"absolute",left:10,top:"50%",transform:"translateY(-50%)",color:"#475569",fontSize:13,pointerEvents:"none"}}>🔍</span>
+          <input type="text" placeholder="Search lab entries…" value={labSearch} onChange={e=>setLabSearch(e.target.value)}
+            style={{width:"100%",boxSizing:"border-box",padding:"8px 32px 8px 30px",background:"#111827",border:"1px solid #1e293b",borderRadius:8,color:"#e2e8f0",fontSize:12,fontFamily:"'Courier New',monospace",outline:"none"}}
+            autoComplete="off" autoCorrect="off" />
+          {labSearch && <button onClick={()=>setLabSearch("")} style={{position:"absolute",right:8,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",color:"#475569",cursor:"pointer",fontSize:14,padding:"0 4px"}}>✕</button>}
+        </div>
+
+        {noResults && (
+          <div style={{textAlign:"center",padding:"32px 0",color:"#475569"}}>
+            <div style={{fontSize:28,marginBottom:8}}>🔍</div>
+            <div style={{fontSize:13}}>No results for &ldquo;{labSearch}&rdquo; in {labTab}</div>
+            <div style={{fontSize:11,marginTop:4}}>Try a shorter term or switch tabs</div>
+          </div>
+        )}
+
         {/* ARTIFACTS TAB */}
-        {labTab === "artifacts" && (
+        {labTab === "artifacts" && !noResults && (
           <div>
-            <p style={{color:"#475569",fontSize:11,marginBottom:14}}>Where to find key artifacts in Axiom Examine — category path, source files, and key notes.</p>
-            {LAB_REF.artifacts.map((cat,ci)=>(
-              <div key={ci} style={{marginBottom:16}}>
-                <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8,padding:"6px 10px",background:`${cat.color}15`,borderRadius:6,border:`1px solid ${cat.color}30`}}>
-                  <span style={{fontSize:14}}>{cat.icon}</span>
-                  <span style={{fontSize:12,fontWeight:700,color:cat.color}}>{cat.category}</span>
-                </div>
-                {cat.items.map((item,ii)=>(
-                  <div key={ii} style={{background:"#111827",borderRadius:8,padding:"11px 13px",marginBottom:8,borderLeft:`3px solid ${cat.color}`}}>
-                    <div style={{fontSize:12,fontWeight:700,color:"#e2e8f0",marginBottom:4}}>{item.name}</div>
-                    <div style={{fontSize:11,color:cat.color,marginBottom:3}}>📍 {item.path}</div>
-                    <div style={{fontSize:10,color:"#475569",marginBottom:6,fontFamily:"monospace",lineHeight:1.4}}>{item.source}</div>
-                    {item.notes && <div style={{fontSize:11,color:"#64748b",lineHeight:1.5,marginBottom:8}}>⚙️ {item.notes}</div>}
-                    {item.meaning && (
-                      <div style={{background:"#0f172a",borderRadius:6,padding:"8px 10px",marginBottom:5,borderLeft:`2px solid ${cat.color}60`}}>
-                        <div style={{fontSize:9,color:cat.color,fontWeight:700,marginBottom:3,letterSpacing:1}}>WHAT IT MEANS</div>
-                        <div style={{fontSize:11,color:"#cbd5e1",lineHeight:1.5}}>{item.meaning}</div>
-                      </div>
-                    )}
-                    {item.identifies && (
-                      <div style={{background:"#0f1a0f",borderRadius:6,padding:"8px 10px",marginBottom:5,borderLeft:"2px solid #00d4a060"}}>
-                        <div style={{fontSize:9,color:"#00d4a0",fontWeight:700,marginBottom:3,letterSpacing:1}}>HELPS IDENTIFY</div>
-                        <div style={{fontSize:11,color:"#86efac",lineHeight:1.5}}>{item.identifies}</div>
-                      </div>
-                    )}
-                    {item.supports && (
-                      <div style={{background:"#0f0f1a",borderRadius:6,padding:"8px 10px",marginBottom:5,borderLeft:"2px solid #a78bfa60"}}>
-                        <div style={{fontSize:9,color:"#a78bfa",fontWeight:700,marginBottom:3,letterSpacing:1}}>SUPPORTS / PROVES</div>
-                        <div style={{fontSize:11,color:"#c4b5fd",lineHeight:1.5}}>{item.supports}</div>
-                      </div>
-                    )}
-                    {item.interpret && (
-                      <div style={{background:"#1a0f00",borderRadius:6,padding:"8px 10px",borderLeft:"2px solid #f59e0b60"}}>
-                        <div style={{fontSize:9,color:"#f59e0b",fontWeight:700,marginBottom:3,letterSpacing:1}}>HOW TO INTERPRET IN FINDINGS</div>
-                        <div style={{fontSize:11,color:"#fde68a",lineHeight:1.55}}>{item.interpret}</div>
-                      </div>
-                    )}
-                  </div>
-                ))}
+            {!lq && (
+              <div style={{display:"flex",justifyContent:"flex-end",gap:6,marginBottom:10}}>
+                <button onClick={()=>setCollapsed(p=>{const n={...p};LAB_REF.artifacts.forEach((_,ci)=>{n[`la-${ci}`]=true;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Collapse all</button>
+                <button onClick={()=>setCollapsed(p=>{const n={...p};LAB_REF.artifacts.forEach((_,ci)=>{n[`la-${ci}`]=false;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Expand all</button>
               </div>
-            ))}
+            )}
+            {fArtifacts.map((cat,ci)=>{
+              const key = `la-${ci}`;
+              const isCollapsed = collapsed[key];
+              return (
+                <div key={ci} style={{marginBottom:10}}>
+                  <button onClick={()=>toggleCollapse(key)} style={{width:"100%",display:"flex",alignItems:"center",gap:8,padding:"8px 10px",background:`${cat.color}15`,borderRadius:isCollapsed?"6px":"6px 6px 0 0",border:`1px solid ${cat.color}30`,cursor:"pointer",textAlign:"left"}}>
+                    <span style={{fontSize:14}}>{cat.icon}</span>
+                    <span style={{fontSize:12,fontWeight:700,color:cat.color,flex:1}}>{cat.category}</span>
+                    <span style={{fontSize:9,color:"#475569",background:"#0f172a",borderRadius:10,padding:"2px 7px",fontWeight:700}}>{cat.items.length}</span>
+                    <span style={{color:cat.color,fontSize:12,transform:isCollapsed?"rotate(-90deg)":"rotate(0deg)",transition:"transform 0.2s",display:"inline-block"}}>▾</span>
+                  </button>
+                  {!isCollapsed && (
+                    <div style={{border:`1px solid ${cat.color}20`,borderTop:"none",borderRadius:"0 0 6px 6px",padding:"8px 0 2px"}}>
+                      {cat.items.map((item,ii)=>(
+                        <div key={ii} style={{background:"#111827",margin:"0 0 6px",padding:"11px 13px",borderLeft:`3px solid ${cat.color}`}}>
+                          <div style={{fontSize:12,fontWeight:700,color:"#e2e8f0",marginBottom:4}}>{item.name}</div>
+                          <div style={{fontSize:11,color:cat.color,marginBottom:3}}>📍 {item.path}</div>
+                          <div style={{fontSize:10,color:"#475569",marginBottom:6,fontFamily:"monospace",lineHeight:1.4}}>{item.source}</div>
+                          {item.notes && <div style={{fontSize:11,color:"#64748b",lineHeight:1.5,marginBottom:8}}>⚙️ {item.notes}</div>}
+                          {item.meaning && (
+                            <div style={{background:"#0f172a",borderRadius:6,padding:"8px 10px",marginBottom:5,borderLeft:`2px solid ${cat.color}60`}}>
+                              <div style={{fontSize:9,color:cat.color,fontWeight:700,marginBottom:3,letterSpacing:1}}>WHAT IT MEANS</div>
+                              <div style={{fontSize:11,color:"#cbd5e1",lineHeight:1.5}}>{item.meaning}</div>
+                            </div>
+                          )}
+                          {item.identifies && (
+                            <div style={{background:"#0f1a0f",borderRadius:6,padding:"8px 10px",marginBottom:5,borderLeft:"2px solid #00d4a060"}}>
+                              <div style={{fontSize:9,color:"#00d4a0",fontWeight:700,marginBottom:3,letterSpacing:1}}>HELPS IDENTIFY</div>
+                              <div style={{fontSize:11,color:"#86efac",lineHeight:1.5}}>{item.identifies}</div>
+                            </div>
+                          )}
+                          {item.supports && (
+                            <div style={{background:"#0f0f1a",borderRadius:6,padding:"8px 10px",marginBottom:5,borderLeft:"2px solid #a78bfa60"}}>
+                              <div style={{fontSize:9,color:"#a78bfa",fontWeight:700,marginBottom:3,letterSpacing:1}}>SUPPORTS / PROVES</div>
+                              <div style={{fontSize:11,color:"#c4b5fd",lineHeight:1.5}}>{item.supports}</div>
+                            </div>
+                          )}
+                          {item.interpret && (
+                            <div style={{background:"#1a0f00",borderRadius:6,padding:"8px 10px",borderLeft:"2px solid #f59e0b60"}}>
+                              <div style={{fontSize:9,color:"#f59e0b",fontWeight:700,marginBottom:3,letterSpacing:1}}>HOW TO INTERPRET</div>
+                              <div style={{fontSize:11,color:"#fde68a",lineHeight:1.55}}>{item.interpret}</div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
         {/* REGISTRY TAB */}
-        {labTab === "registry" && (
+        {labTab === "registry" && !noResults && (
           <div>
-            <p style={{color:"#475569",fontSize:11,marginBottom:14}}>Key registry hives, paths, the Axiom artifact they produce, and what data they contain.</p>
-            {LAB_REF.registry.map((r,i)=>(
+            <div style={{fontSize:11,color:"#475569",marginBottom:12}}>Key registry hives, paths, artifacts, and forensic significance.</div>
+            {fRegistry.map((r,i)=>(
               <div key={i} style={{background:"#111827",borderRadius:8,padding:"10px 12px",marginBottom:8,borderLeft:"3px solid #a78bfa"}}>
                 <div style={{display:"flex",gap:6,alignItems:"center",marginBottom:5,flexWrap:"wrap"}}>
                   <span style={{fontSize:10,background:"#1e1b4b",color:"#a78bfa",padding:"2px 8px",borderRadius:10,fontWeight:700,flexShrink:0}}>{r.hive}</span>
@@ -3333,68 +3057,112 @@ Answer questions directly, specifically, and concisely. For navigation questions
         )}
 
         {/* FILE PATHS TAB */}
-        {labTab === "paths" && (
+        {labTab === "paths" && !noResults && (
           <div>
-            <p style={{color:"#475569",fontSize:11,marginBottom:14}}>Forensically important file locations on disk — useful for File System Explorer navigation and source link verification.</p>
-            {LAB_REF.paths.map((section,si)=>(
-              <div key={si} style={{marginBottom:16}}>
-                <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8,padding:"6px 10px",background:`${section.color}15`,borderRadius:6,border:`1px solid ${section.color}30`}}>
-                  <span style={{fontSize:12,fontWeight:700,color:section.color}}>{section.category}</span>
-                </div>
-                {section.entries.map((e,ei)=>(
-                  <div key={ei} style={{background:"#111827",borderRadius:8,padding:"9px 12px",marginBottom:5,borderLeft:`3px solid ${section.color}`}}>
-                    <div style={{fontSize:11,fontWeight:700,color:"#e2e8f0",marginBottom:3}}>{e.label}</div>
-                    <div style={{fontSize:10,color:"#60a5fa",fontFamily:"monospace",marginBottom:3,wordBreak:"break-all",lineHeight:1.5}}>{e.path}</div>
-                    <div style={{fontSize:10,color:"#64748b",lineHeight:1.4}}>{e.files}</div>
-                  </div>
-                ))}
+            {!lq && (
+              <div style={{display:"flex",justifyContent:"flex-end",gap:6,marginBottom:10}}>
+                <button onClick={()=>setCollapsed(p=>{const n={...p};LAB_REF.paths.forEach((_,si)=>{n[`lp-${si}`]=true;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Collapse all</button>
+                <button onClick={()=>setCollapsed(p=>{const n={...p};LAB_REF.paths.forEach((_,si)=>{n[`lp-${si}`]=false;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Expand all</button>
               </div>
-            ))}
+            )}
+            {fPaths.map((section,si)=>{
+              const key = `lp-${si}`;
+              const isCollapsed = collapsed[key];
+              return (
+                <div key={si} style={{marginBottom:10}}>
+                  <button onClick={()=>toggleCollapse(key)} style={{width:"100%",display:"flex",alignItems:"center",gap:8,padding:"8px 10px",background:`${section.color}15`,borderRadius:isCollapsed?"6px":"6px 6px 0 0",border:`1px solid ${section.color}30`,cursor:"pointer",textAlign:"left"}}>
+                    <span style={{fontSize:12,fontWeight:700,color:section.color,flex:1}}>{section.category}</span>
+                    <span style={{fontSize:9,color:"#475569",background:"#0f172a",borderRadius:10,padding:"2px 7px",fontWeight:700}}>{section.entries.length}</span>
+                    <span style={{color:section.color,fontSize:12,transform:isCollapsed?"rotate(-90deg)":"rotate(0deg)",transition:"transform 0.2s",display:"inline-block"}}>▾</span>
+                  </button>
+                  {!isCollapsed && (
+                    <div style={{border:`1px solid ${section.color}20`,borderTop:"none",borderRadius:"0 0 6px 6px",padding:"6px 0 2px"}}>
+                      {section.entries.map((e,ei)=>(
+                        <div key={ei} style={{background:"#111827",margin:"0 0 5px",padding:"9px 12px",borderLeft:`3px solid ${section.color}`}}>
+                          <div style={{fontSize:11,fontWeight:700,color:"#e2e8f0",marginBottom:3}}>{e.label}</div>
+                          <div style={{fontSize:10,color:"#60a5fa",fontFamily:"monospace",marginBottom:3,wordBreak:"break-all",lineHeight:1.5}}>{e.path}</div>
+                          <div style={{fontSize:10,color:"#64748b",lineHeight:1.4}}>{e.files}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
         {/* PLAYBOOKS TAB */}
-        {labTab === "playbooks" && (
+        {labTab === "playbooks" && !noResults && (
           <div>
-            <p style={{color:"#475569",fontSize:11,marginBottom:14}}>Step-by-step investigation workflows for common DFIR scenarios using Magnet AXIOM.</p>
-            {LAB_REF.playbooks.map((pb,pi)=>(
-              <div key={pi} style={{background:"#111827",border:`1px solid ${pb.color}30`,borderRadius:10,padding:14,marginBottom:16}}>
-                <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
-                  <span style={{fontSize:18}}>{pb.icon}</span>
-                  <span style={{fontSize:13,fontWeight:700,color:pb.color}}>{pb.title}</span>
-                </div>
-                {pb.steps.map((s,si)=>(
-                  <div key={si} style={{display:"flex",gap:10,marginBottom:8,alignItems:"flex-start"}}>
-                    <div style={{minWidth:22,height:22,borderRadius:"50%",background:`${pb.color}20`,border:`1px solid ${pb.color}40`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,color:pb.color,fontWeight:700,flexShrink:0}}>{s.step}</div>
-                    <div>
-                      <div style={{fontSize:12,fontWeight:700,color:"#e2e8f0",marginBottom:2}}>{s.action}</div>
-                      <div style={{fontSize:11,color:"#64748b",lineHeight:1.5}}>{s.detail}</div>
-                    </div>
-                  </div>
-                ))}
+            {!lq && (
+              <div style={{display:"flex",justifyContent:"flex-end",gap:6,marginBottom:10}}>
+                <button onClick={()=>setCollapsed(p=>{const n={...p};LAB_REF.playbooks.forEach((_,pi)=>{n[`lpb-${pi}`]=true;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Collapse all</button>
+                <button onClick={()=>setCollapsed(p=>{const n={...p};LAB_REF.playbooks.forEach((_,pi)=>{n[`lpb-${pi}`]=false;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Expand all</button>
               </div>
-            ))}
+            )}
+            {fPlaybooks.map((pb,pi)=>{
+              const key = `lpb-${pi}`;
+              const isCollapsed = collapsed[key];
+              return (
+                <div key={pi} style={{background:"#111827",border:`1px solid ${pb.color}30`,borderRadius:10,marginBottom:10,overflow:"hidden"}}>
+                  <button onClick={()=>toggleCollapse(key)} style={{width:"100%",display:"flex",alignItems:"center",gap:10,padding:"12px 14px",background:"transparent",border:"none",cursor:"pointer",textAlign:"left"}}>
+                    <span style={{fontSize:18}}>{pb.icon}</span>
+                    <span style={{fontSize:13,fontWeight:700,color:pb.color,flex:1}}>{pb.title}</span>
+                    <span style={{fontSize:9,color:"#475569",background:"#0f172a",borderRadius:10,padding:"2px 7px",fontWeight:700}}>{pb.steps.length} steps</span>
+                    <span style={{color:pb.color,fontSize:12,transform:isCollapsed?"rotate(-90deg)":"rotate(0deg)",transition:"transform 0.2s",display:"inline-block"}}>▾</span>
+                  </button>
+                  {!isCollapsed && (
+                    <div style={{padding:"0 14px 14px"}}>
+                      {pb.steps.map((s,si)=>(
+                        <div key={si} style={{display:"flex",gap:10,marginBottom:8,alignItems:"flex-start"}}>
+                          <div style={{minWidth:22,height:22,borderRadius:"50%",background:`${pb.color}20`,border:`1px solid ${pb.color}40`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,color:pb.color,fontWeight:700,flexShrink:0}}>{s.step}</div>
+                          <div>
+                            <div style={{fontSize:12,fontWeight:700,color:"#e2e8f0",marginBottom:2}}>{s.action}</div>
+                            <div style={{fontSize:11,color:"#64748b",lineHeight:1.5}}>{s.detail}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
         {/* QUICK REF TAB */}
-        {labTab === "quickref" && (
+        {labTab === "quickref" && !noResults && (
           <div>
-            <p style={{color:"#475569",fontSize:11,marginBottom:14}}>Keyboard shortcuts, key settings, fast-lookup artifact details, and acquisition reference.</p>
-            {LAB_REF.quickref.map((section,si)=>(
-              <div key={si} style={{background:"#111827",border:"1px solid #1e293b",borderRadius:10,padding:14,marginBottom:14}}>
-                <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-                  <span style={{fontSize:14}}>{section.icon}</span>
-                  <span style={{fontSize:12,fontWeight:700,color:section.color}}>{section.title}</span>
-                </div>
-                {section.items.map((item,ii)=>(
-                  <div key={ii} style={{display:"flex",gap:8,padding:"6px 0",borderBottom:"1px solid #1e293b20",alignItems:"flex-start"}}>
-                    <div style={{fontSize:10,fontWeight:700,color:section.color,background:`${section.color}15`,padding:"3px 8px",borderRadius:6,minWidth:80,textAlign:"center",flexShrink:0,lineHeight:1.4}}>{item.key}</div>
-                    <div style={{fontSize:11,color:"#cbd5e1",lineHeight:1.5,flex:1}}>{item.action}</div>
-                  </div>
-                ))}
+            {!lq && (
+              <div style={{display:"flex",justifyContent:"flex-end",gap:6,marginBottom:10}}>
+                <button onClick={()=>setCollapsed(p=>{const n={...p};LAB_REF.quickref.forEach((_,si)=>{n[`lqr-${si}`]=true;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Collapse all</button>
+                <button onClick={()=>setCollapsed(p=>{const n={...p};LAB_REF.quickref.forEach((_,si)=>{n[`lqr-${si}`]=false;});return n;})} style={{fontSize:10,color:"#64748b",background:"none",border:"1px solid #1e293b",borderRadius:5,cursor:"pointer",padding:"3px 8px"}}>Expand all</button>
               </div>
-            ))}
+            )}
+            {fQuickref.map((section,si)=>{
+              const key = `lqr-${si}`;
+              const isCollapsed = collapsed[key];
+              return (
+                <div key={si} style={{background:"#111827",border:"1px solid #1e293b",borderRadius:10,marginBottom:10,overflow:"hidden"}}>
+                  <button onClick={()=>toggleCollapse(key)} style={{width:"100%",display:"flex",alignItems:"center",gap:8,padding:"11px 14px",background:"transparent",border:"none",cursor:"pointer",textAlign:"left"}}>
+                    <span style={{fontSize:14}}>{section.icon}</span>
+                    <span style={{fontSize:12,fontWeight:700,color:section.color,flex:1}}>{section.title}</span>
+                    <span style={{color:section.color,fontSize:12,transform:isCollapsed?"rotate(-90deg)":"rotate(0deg)",transition:"transform 0.2s",display:"inline-block"}}>▾</span>
+                  </button>
+                  {!isCollapsed && (
+                    <div style={{padding:"0 14px 12px"}}>
+                      {section.items.map((item,ii)=>(
+                        <div key={ii} style={{display:"flex",gap:8,padding:"6px 0",borderBottom:"1px solid #1e293b20",alignItems:"flex-start"}}>
+                          <div style={{fontSize:10,fontWeight:700,color:section.color,background:`${section.color}15`,padding:"3px 8px",borderRadius:6,minWidth:80,textAlign:"center",flexShrink:0,lineHeight:1.4}}>{item.key}</div>
+                          <div style={{fontSize:11,color:"#cbd5e1",lineHeight:1.5,flex:1}}>{item.action}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
